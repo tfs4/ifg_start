@@ -73,6 +73,7 @@ INSTALLED_APPS = [
 
     'djangocore.apps.importador',
     'djangocore.apps.exemplo',
+    'djangocore.apps.flavio',
 
 
 ]

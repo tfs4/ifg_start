@@ -11,6 +11,7 @@ urlpatterns = [
     url(r'^login/', include('djangocore.apps.login.urls')),
     url(r'^importador/', include('djangocore.apps.importador.urls')),
     url(r'^importador/', include('djangocore.apps.exemplo.urls')),
+    url(r'^flavio/', include('djangocore.apps.flavio.urls')),
 
 
 ]
