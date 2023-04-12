@@ -1,0 +1,88 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid lista">
+  
+    {% include 'base/title_header.html' %}
+    
+    {% include 'base/msg_sucesso.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+      <div class="card">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="header">
+            <h2>
+              {{title_complete}}
+            </h2>
+              <div class="header-btn">
+              </div>
+          </div>
+
+          <div class="body">
+
+           {% include 'base/search.html' %}
+
+           <div class="table-responsive">
+            <table id="lista-database" class="table table-bordered table-striped lista-table">
+              <thead>
+                <tr>
+                        <th>Exercicio</th>
+                        <th>Periodo</th>
+                        <th>Periodicidade</th>
+                        <th>Instituicao</th>
+                        <th>Cod. IBGE</th>
+                        <th>UF</th>
+                        <th>co_poder</th>
+                        <th>Populacao</th>
+                        <th>Anexo</th>
+                        <th>Esfera</th>
+                        <th>Rotulo</th>
+                        <th>Coluna</th>
+                        <th>Cod. Conta</th>
+                        <th>Conta</th>
+                        <th>Valor</th>
+                </tr>
+              </thead>
+
+              <tbody>
+               {% if all_natops%}
+               {% for natop in all_natops %}
+               <tr>
+                   <td>{{natop.periodo}}</td>
+                   <td>{{natop.exercicio}}</td>
+                   <td>{{natop.periodicidade}}</td>
+                   <td>{{natop.instituicao}}</td>
+                   <td>{{natop.cod_ibge}}</td>
+                   <td>{{natop.uf}}</td>
+                   <td>{{natop.co_poder}}</td>
+                   <td>{{natop.populacao}}</td>
+                   <td>{{natop.anexo}}</td>
+                   <td>{{natop.esfera}}</td>
+                   <td>{{natop.rotulo}}</td>
+                   <td>{{natop.coluna}}</td>
+                   <td>{{natop.cod_conta}}</td>
+                   <td>{{natop.conta}}</td>
+                   <td>{{natop.valor}}</td>
+              </tr>
+              {% endfor %}
+              {%else%}
+              {%endif%}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+</div>
+</section>
+
+
+{%endblock%}
