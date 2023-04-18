@@ -982,7 +982,7 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
     .card .header .header-btn{
       float:right;
       margin-right:10px; }
-      .card .header .header-btn .btn-remove{
+      .card .header .header-btn .btn-remove {
         display: none; }
       .card .header .header-btn .dropdown a{
         width: 100%;
@@ -991,7 +991,8 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
     .card .header a span{
       vertical-align: 2px; }
 
-
+.btn-remove-alert {
+        display: none; }
 .card .body {
   font-size: 14px;
   color: #555;

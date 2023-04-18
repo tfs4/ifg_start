@@ -130,7 +130,7 @@ $.Admin.messages = {
         $('#modal-msg #btn-nao').hide();
     },
 
-    //Mensagem pergunta antes de remover
+    //Alerta
     msgRemove: function(message){
         $('#modal-msg .modal-header span i').text('error_outline').addClass('icon-alert');
         $('#modal-msg .modal-body p').text(message);
@@ -139,7 +139,25 @@ $.Admin.messages = {
         $('#modal-msg #btn-sim').show();
         $('#modal-msg #btn-nao').show();
         $('#modal-msg #btn-ok').hide();
+        $('#modal-msg #confirme_check_1').hide();
+        $('#modal-msg #confirme_check_2').hide();
     },
+
+
+    //Mensagem pergunta antes de fonfirmação
+    msgConfirm: function(message){
+        $('#modal-msg .modal-header span i').text('error_outline').addClass('icon-alert');
+        $('#modal-msg .modal-body #primeira_mensagem').text(message);
+        $('#modal-msg .modal-title').text('Antes de continuar, confirme os itens abaixo:');
+        $('#modal-msg #confirme_check_1').show();
+        $('#modal-msg #confirme_check_2').show();
+        $('#modal-msg').modal('show');
+        $('#modal-msg #btn-sim').show();
+        $('#modal-msg #btn-nao').show();
+        $('#modal-msg #btn-ok').hide();
+
+    },
+
 
     //Mensagem operação não permitida
     msgAlerta: function(message){
@@ -242,7 +260,7 @@ $.Admin.table = {
             });
         });
 
-        //Fazer a linha da table um link para a detail views
+        //Fazer a linha da table um link para a detail view
         $('body').on('click', '.clickable-row:not(.popup)', function(event){
             if(!$(event.target).is("input, label, i, .prevent-click-row")){
                 window.document.location = $(this).data("href");
@@ -970,7 +988,7 @@ $.Admin.vendaForm = {
         var produtos_input = $('select.select-produto');
 
         $.Admin.maskInput.maskVenda();
-        //Preencher campos edit views
+        //Preencher campos edit view
         $('#id_valor_total_display').text($('#id_valor_total').val());
 
         $('.formset[id^=produtos_form-]').each(function(){
@@ -1932,7 +1950,7 @@ $.Admin.compraForm = {
         var produtos_input = $('select.select-produto');
 
         $.Admin.maskInput.maskVenda();
-        //Preencher campos edit views
+        //Preencher campos edit view
         $('#id_valor_total_display').text($('#id_valor_total').val());
 
         $('.formset[id^=produtos_form-]').each(function(){
@@ -3325,6 +3343,58 @@ $.Admin.dinamicMenu = {
     }
 };
 
+
+
+//DataTable
+$.Admin.alert = {
+   init: function() {
+        var $btnRemove = $('.btn-remove-alert');
+
+
+//Confirmou se temos independência para emitir esta proposta?
+//
+// Você fez uma anális de background check para aceitar esse cliente?
+
+       //Mudar o background do tr quando remover for selecionado
+        $('body').on('change', '.lista-remove input[type=checkbox]', function(event){
+            if(this.checked){
+                $(this).parents('tr').addClass("delete-row");
+            }else{
+                $(this).parents('tr').removeClass("delete-row");
+            }
+            $btnRemove.show()
+        });
+
+        $btnRemove.on('click',function(event){
+            event.preventDefault();
+            //|hidden|collapse|initial|inherit
+            $('#confirm_check_item_1').css("visibility", "visible");
+            var form = $(this).parents('form');
+            $.Admin.messages.msgConfirm("Tem certeza que deseja excluir este item?");
+            $('#btn-sim').one('click', function(){
+                if($('#confirme_check_1').is(':checked'))
+                {
+                    form.submit();
+                }
+            });
+        });
+
+
+
+        //Fazer a linha da table um link para a detail view
+        $('body').on('click', '.clickable-row:not(.popup)', function(event){
+            if(!$(event.target).is("input, label, i, .prevent-click-row")){
+                window.document.location = $(this).data("href");
+            }
+        });
+
+    },
+}
+
+
+
+
+
 $(function () {
     $.Admin.barraLateral.init();
     $.Admin.navbar.init();
@@ -3332,6 +3402,8 @@ $(function () {
     $.Admin.formset.init();
     $.Admin.validation.init();
     $.Admin.dinamicMenu.init();
+    $.Admin.alert.init();
 
     setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
 });
+
