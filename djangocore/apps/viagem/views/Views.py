@@ -208,6 +208,10 @@ class ListViagensView(CustomListView):
     success_url = reverse_lazy('viagem:listaviagem')
     permission_codename = 'view_naturezaoperacao'
 
+    def get_object(self):
+        current_user = self.request.user
+        return ViagemModel.objects.get(user=current_user)
+
     def get_context_data(self, **kwargs):
         context = super(ListViagensView, self).get_context_data(**kwargs)
         context['title_complete'] = 'Viagens'

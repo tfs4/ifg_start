@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 
 class TiposDeViagemModel(models.Model):
     nome = models.CharField(max_length=200)
@@ -27,13 +27,13 @@ class TipoDeTransporteModel(models.Model):
 
 
 class ViagemModel(models.Model):
+    user = models.ForeignKey(User, related_name="viagem_user", on_delete=models.CASCADE, null=True, blank=True)
     valor_passagem = models.CharField(max_length=200)
     dada_inicio =  models.DateTimeField()
     dada_fim =  models.DateField()
     origem = models.CharField(max_length=200)
     destino = models.CharField(max_length=200)
     objetivo = models.CharField(max_length=200)
-
     tipo_viagem         = models.ForeignKey(TiposDeViagemModel, related_name="viagem_tipo", on_delete=models.CASCADE)
     tipo_solicitacao    = models.ForeignKey(TiposDeViagemModel, related_name="viagem_solicitacao", on_delete=models.CASCADE)
     motivo              = models.ForeignKey(MotivoDeViagemModel, related_name="viagem_motivo", on_delete=models.CASCADE)
