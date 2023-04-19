@@ -134,6 +134,33 @@ icones https://materializecss.com/icons.html
                         </a>
                     </li>
 
+
+                    <!-- Inicio Viagens -->
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">&#xE1BD;</i>
+                            <span>Viagens</span>
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <li>
+                                    <a href="{% url 'viagem:listatiposviagens' %}">
+                                         <span>Tipos de Viagens</span>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="{% url 'viagem:listatiposolicitacao' %}">
+                                         <span>Tipos de Solicitação</span>
+                                    </a>
+                                </li>
+
+                            </li>
+                        </ul>
+                    </li>
+
+                    <!-- Fim Viagens-->
+
                     <li>
                         <a href="{% url 'flavio:lista_pessoa' %}">
                            <i class="material-icons">&#xE85D;</i>
@@ -141,6 +168,19 @@ icones https://materializecss.com/icons.html
                         </a>
                     </li>
 
+
+                    <li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            Viagens
+                        </a>
+                        <ul class="ml-menu">
+                            <li>
+                                <a href="{% url 'viagem:listatiposviagens' %}">
+                                     <span>Tipos de Viagens</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
 
                 </ul>
             </div>

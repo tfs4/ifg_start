@@ -19,7 +19,9 @@
             </h2>
               <div class="header-btn">
                 <a href="{{add_url}}" class="btn btn-success"><i class="material-icons">&#xE148;</i><span> ADICIONAR</span></a>
-                <button class="btn btn-red btn-remove"><i class="material-icons">&#xE872;</i></button>
+                <!--<button class="btn btn-red btn-remove"><i class="material-icons">&#xE872;</i></button> -->
+                <button class="btn btn-red btn-remove-alert" ><i class="material-icons">&#xE872;</i></button>
+
               </div>
           </div>
 
@@ -32,8 +34,6 @@
               <thead>
                 <tr>
                   <th>Nome</th>
-                  <th>CPF</th>
-                  <th>Endereço</th>
                   <th>Remover</th>
                 </tr>
               </thead>
@@ -42,10 +42,8 @@
                {% if all_natops%}
                {% for natop in all_natops %}
 
-               <tr class="clickable-row"  data-href="{% url 'flavio:edita_pessoa' natop.id %}">
+               <tr class="clickable-row"  data-href="{% url 'viagem:editartiposviagens' natop.id %}">
                 <td>{{natop.nome}}</td>
-                <td>{{natop.cpf}}</td>
-                <td>{{natop.endereco}}</td>
                 <td class="lista-remove">
                   <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
                   <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>
