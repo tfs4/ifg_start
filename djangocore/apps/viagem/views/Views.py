@@ -39,10 +39,6 @@ class AdicionarTipoViagemView(CustomCreateView):
         context['return_url'] = reverse_lazy('viagem:listatiposviagens')
         return context
 
-
-
-
-
 class EditarTipoViagemView(CustomUpdateView):
     form_class = TipoViagemForm
     model = TiposDeViagemModel
@@ -154,3 +150,98 @@ class EditarTipoTransporteView(CustomUpdateView):
         context['return_url'] = reverse_lazy('viagem:listatipotransporte')
         return context
 
+
+
+#### MotivosViagem
+class ListMotivosView(CustomListView):
+    template_name = 'viagem/list_motivo.html'
+    model = MotivoDeViagemModel
+    context_object_name = 'all_natops'
+    success_url = reverse_lazy('viagem:listamotivos')
+    permission_codename = 'view_naturezaoperacao'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListMotivosView, self).get_context_data(**kwargs)
+        context['title_complete'] = 'Motivos de Viagens'
+        context['add_url'] = reverse_lazy('viagem:adicionarmotivo')
+        return context
+
+class AdicionarMotivoView(CustomCreateView):
+    form_class = TipoMotivoForm
+    template_name = 'viagem/add.html'
+    success_url = reverse_lazy('viagem:listamotivos')
+    success_message = "Motivo de Viagem adicionado com sucesso."
+    permission_codename = 'add_naturezaoperacao'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+
+    def get_context_data(self, **kwargs):
+        context = super(AdicionarMotivoView, self).get_context_data(**kwargs)
+        context['title_complete'] = 'ADICIONAR VIAGEM'
+        context['return_url'] = reverse_lazy('viagem:listamotivos')
+        return context
+
+class EditarMotivoView(CustomUpdateView):
+    form_class = TipoMotivoForm
+    model = MotivoDeViagemModel
+    template_name = 'viagem/edit.html'
+    success_url = reverse_lazy('viagem:listamotivos')
+    success_message = "Motivo de Viagem Editada com Sucesso."
+    permission_codename = 'change_naturezaoperacao'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditarMotivoView, self).get_context_data(**kwargs)
+        context['return_url'] = reverse_lazy('viagem:listamotivos')
+        return context
+
+
+
+#### Viagem
+class ListViagensView(CustomListView):
+    template_name = 'viagem/list_viagens.html'
+    model = ViagemModel
+    context_object_name = 'all_natops'
+    success_url = reverse_lazy('viagem:listaviagem')
+    permission_codename = 'view_naturezaoperacao'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListViagensView, self).get_context_data(**kwargs)
+        context['title_complete'] = 'Viagens'
+        context['add_url'] = reverse_lazy('viagem:adicionarviagem')
+        return context
+
+class AdicionarViagemView(CustomCreateView):
+    form_class = ViagemForm
+    template_name = 'viagem/add.html'
+    success_url = reverse_lazy('viagem:listaviagem')
+    success_message = "Tipo de Viagem adicionado com sucesso."
+    permission_codename = 'add_naturezaoperacao'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+
+    def get_context_data(self, **kwargs):
+        context = super(AdicionarViagemView, self).get_context_data(**kwargs)
+        context['title_complete'] = 'ADICIONAR VIAGEM'
+        context['return_url'] = reverse_lazy('viagem:listaviagem')
+        return context
+
+class EditarViagemView(CustomUpdateView):
+    form_class = ViagemForm
+    model = ViagemModel
+    template_name = 'viagem/edit.html'
+    success_url = reverse_lazy('viagem:listaviagem')
+    success_message = "Viagem Editada com Sucesso."
+    permission_codename = 'change_naturezaoperacao'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditarViagemView, self).get_context_data(**kwargs)
+        context['return_url'] = reverse_lazy('viagem:listaviagem')
+        return context

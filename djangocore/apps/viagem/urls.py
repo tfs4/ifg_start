@@ -21,4 +21,14 @@ urlpatterns = [
     url(r'viagem/adicionartipotransporte/$', views.AdicionarTipoTransporteView.as_view(), name='adicionartipotransporte'),
     url(r'viagem/editartipotransporte/(?P<pk>[0-9]+)/$', views.EditarTipoTransporteView.as_view(),name='editartipotransporte'),
 
+    # Motivos de Transporte
+    url(r'viagem/listamotivos/$', views.ListMotivosView.as_view(), name='listamotivos'),
+    url(r'viagem/adicionarmotivo/$', views.AdicionarMotivoView.as_view(), name='adicionarmotivo'),
+    url(r'viagem/editarmotivo/(?P<pk>[0-9]+)/$', views.EditarMotivoView.as_view(), name='editarmotivo'),
+
+    # Viagens
+    url(r'viagem/listarviagem/$', views.ListViagensView.as_view(), name='listaviagem'),
+    url(r'viagem/adicionarviagem/$', views.AdicionarViagemView.as_view(), name='adicionarviagem'),
+    url(r'viagem/editarviagem/(?P<pk>[0-9]+)/$', views.EditarViagemView.as_view(), name='editarviagem'),
+
 ]
