@@ -35,6 +35,19 @@ class TipoDeSolicitacaoForm(forms.ModelForm):
             'nome': _('Nome'),
         }
 
+class TipoDeTransporteForm(forms.ModelForm):
+
+    class Meta:
+        model = TipoDeTransporteModel
+        fields = ('nome', )
+        widgets = {
+            'nome': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
+
+        }
+        labels = {
+            'nome': _('Nome'),
+        }
+
 class TipoMotivoForm(forms.ModelForm):
 
     class Meta:

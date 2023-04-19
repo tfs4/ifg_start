@@ -91,10 +91,6 @@ class AdicionarTipoSolicitacaoView(CustomCreateView):
         context['return_url'] = reverse_lazy('viagem:listatiposolicitacao')
         return context
 
-
-
-
-
 class EditarTipoSolicitacaoView(CustomUpdateView):
     form_class = TipoDeSolicitacaoForm
     model = TiposDeSolicitacaoModel
@@ -109,5 +105,52 @@ class EditarTipoSolicitacaoView(CustomUpdateView):
     def get_context_data(self, **kwargs):
         context = super(EditarTipoSolicitacaoView, self).get_context_data(**kwargs)
         context['return_url'] = reverse_lazy('viagem:listatiposolicitacao')
+        return context
+
+
+#### Tipos de Transporte
+class ListTipoTransporteView(CustomListView):
+    template_name = 'viagem/list_tipo_transporte.html'
+    model = TipoDeTransporteModel
+    context_object_name = 'all_natops'
+    success_url = reverse_lazy('viagem:listatipotransporte')
+    permission_codename = 'view_naturezaoperacao'
+
+    def get_context_data(self, **kwargs):
+        context = super(ListTipoTransporteView, self).get_context_data(**kwargs)
+        context['title_complete'] = 'Exemplo'
+        context['add_url'] = reverse_lazy('viagem:adicionartipotransporte')
+        return context
+
+class AdicionarTipoTransporteView(CustomCreateView):
+    form_class = TipoDeTransporteForm
+    template_name = 'viagem/add.html'
+    success_url = reverse_lazy('viagem:listatipotransporte')
+    success_message = "Tipo de Transporte adicionado com sucesso."
+    permission_codename = 'add_naturezaoperacao'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+
+    def get_context_data(self, **kwargs):
+        context = super(AdicionarTipoTransporteView, self).get_context_data(**kwargs)
+        context['title_complete'] = 'ADICIONAR TIPO DE TRANSPORTE'
+        context['return_url'] = reverse_lazy('viagem:listatipotransporte')
+        return context
+
+class EditarTipoTransporteView(CustomUpdateView):
+    form_class = TipoDeTransporteForm
+    model = TipoDeTransporteModel
+    template_name = 'viagem/edit.html'
+    success_url = reverse_lazy('viagem:listatipotransporte')
+    success_message = "Tipo de Transporte Editado com Sucesso."
+    permission_codename = 'change_naturezaoperacao'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+
+    def get_context_data(self, **kwargs):
+        context = super(EditarTipoTransporteView, self).get_context_data(**kwargs)
+        context['return_url'] = reverse_lazy('viagem:listatipotransporte')
         return context
 
