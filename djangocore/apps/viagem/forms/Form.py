@@ -6,7 +6,11 @@ import datetime
 from djangocore.apps.viagem.models import *
 
 
-
+class DateInput(forms.DateInput):
+    input_type = "date"
+    def __init__(self, **kwargs):
+        kwargs["format"] = "%d-%m-%Y"
+        super().__init__(**kwargs)
 
 class TipoViagemForm(forms.ModelForm):
 
@@ -78,9 +82,10 @@ class ViagemForm(forms.ModelForm):
                   'motivo',
                   'tipo_transporte',    )
         widgets = {
+
             'valor_passagem': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
-            'dada_inicio': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
-            'dada_fim': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
+            'dada_inicio': DateInput(format=["%Y-%m-%d"], attrs={'class': 'form-control', 'size': '200'}),
+            'dada_fim': DateInput(format=["%Y-%m-%d"], attrs={'class': 'form-control', 'size': '200'}),
             'origem': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
             'destino': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
             'objetivo': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),

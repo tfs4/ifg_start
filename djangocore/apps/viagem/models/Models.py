@@ -4,20 +4,32 @@ from django.db import models
 class TiposDeViagemModel(models.Model):
     nome = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.nome
+
 class TiposDeSolicitacaoModel(models.Model):
     nome = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.nome
 
 class MotivoDeViagemModel(models.Model):
     nome = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.nome
+
 class TipoDeTransporteModel(models.Model):
     nome = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.nome
 
 
 class ViagemModel(models.Model):
     valor_passagem = models.CharField(max_length=200)
-    dada_inicio = models.CharField(max_length=200)
-    dada_fim = models.CharField(max_length=200)
+    dada_inicio =  models.DateTimeField()
+    dada_fim =  models.DateField()
     origem = models.CharField(max_length=200)
     destino = models.CharField(max_length=200)
     objetivo = models.CharField(max_length=200)
