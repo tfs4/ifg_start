@@ -27,6 +27,12 @@ class TipoDeTransporteModel(models.Model):
 
 
 class ViagemModel(models.Model):
+    class Meta:
+        verbose_name = "Viagens"
+        permissions = (
+            ("solicitar_viagens", "Pode solicitar viagens"),
+        )
+
     solicitante = models.ForeignKey(User, related_name="viagem_user", on_delete=models.CASCADE, null=True, blank=True)
     valor_passagem = models.CharField(max_length=200)
     dada_inicio =  models.DateTimeField()

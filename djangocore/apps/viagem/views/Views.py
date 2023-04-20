@@ -207,7 +207,7 @@ class ListViagensView(CustomListView):
     model = ViagemModel
     context_object_name = 'all_natops'
     success_url = reverse_lazy('viagem:listaviagem')
-    permission_codename = 'view_naturezaoperacao'
+    permission_codename = 'solicitar_viagens'
 
     def get_object(self):
         current_user = self.request.user
@@ -224,7 +224,7 @@ class AdicionarViagemView(CustomCreateView):
     template_name = 'viagem/add.html'
     success_url = reverse_lazy('viagem:listaviagem')
     success_message = "Tipo de Viagem adicionado com sucesso."
-    permission_codename = 'add_naturezaoperacao'
+    permission_codename = 'solicitar_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
@@ -255,7 +255,7 @@ class EditarViagemView(CustomUpdateView):
     template_name = 'viagem/edit.html'
     success_url = reverse_lazy('viagem:listaviagem')
     success_message = "Viagem Editada com Sucesso."
-    permission_codename = 'change_naturezaoperacao'
+    permission_codename = 'solicitar_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)

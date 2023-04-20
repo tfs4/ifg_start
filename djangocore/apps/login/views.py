@@ -35,9 +35,9 @@ import operator
 from functools import reduce
 
 
-DEFAULT_PERMISSION_MODELS = ['importar_dados', 'eac', 'rgf', 'rreo', ]
+DEFAULT_PERMISSION_MODELS = []
 
-CUSTOM_PERMISSIONS = ['importar_dados', 'eac', 'rgf', 'rreo', ]
+CUSTOM_PERMISSIONS = [ 'solicitar_viagens', ]
 
 
 class UserFormView(View):
