@@ -67,8 +67,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'djmoney',
-
     'djangocore.apps.base',
     'djangocore.apps.login',
 

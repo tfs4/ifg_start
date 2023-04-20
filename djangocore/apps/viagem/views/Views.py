@@ -3,6 +3,7 @@
 from django.urls import reverse_lazy
 
 from djangocore.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
+from django.shortcuts import redirect
 
 
 from djangocore.apps.viagem.forms import *
@@ -227,6 +228,20 @@ class AdicionarViagemView(CustomCreateView):
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+
+    def post(self, request, *args, **kwargs):
+
+
+        self.object = None
+        form_class = self.get_form_class()
+
+        form = self.get_form(form_class)
+        form.request_user = self.request.user
+
+        if form.is_valid():
+            self.object = form.save()
+            return redirect(self.success_url)
+        return self.form_invalid(form)
 
     def get_context_data(self, **kwargs):
         context = super(AdicionarViagemView, self).get_context_data(**kwargs)

@@ -69,6 +69,11 @@ class TipoMotivoForm(forms.ModelForm):
 
 class ViagemForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super(ViagemForm, self).__init__(*args, **kwargs)
+
+
     class Meta:
         model = ViagemModel
         fields = ('valor_passagem',
@@ -107,3 +112,10 @@ class ViagemForm(forms.ModelForm):
             'tipo_transporte': _('Tipo de Transporte'),
 
         }
+    def save(self, commit=True):
+        instance = super(ViagemForm, self).save(commit=False)
+        instance.solicitante = self.request_user
+        if commit:
+            instance.save()
+        return instance
+

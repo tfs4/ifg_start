@@ -27,7 +27,7 @@ class TipoDeTransporteModel(models.Model):
 
 
 class ViagemModel(models.Model):
-    user = models.ForeignKey(User, related_name="viagem_user", on_delete=models.CASCADE, null=True, blank=True)
+    solicitante = models.ForeignKey(User, related_name="viagem_user", on_delete=models.CASCADE, null=True, blank=True)
     valor_passagem = models.CharField(max_length=200)
     dada_inicio =  models.DateTimeField()
     dada_fim =  models.DateField()
