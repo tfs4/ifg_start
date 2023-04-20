@@ -1,0 +1,95 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid lista">
+  
+    {% include 'base/title_header.html' %}
+    
+    {% include 'base/msg_sucesso.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+      <div class="card">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="header">
+            <h2>
+              {{title_complete}}
+            </h2>
+              <div class="header-btn">
+                <!-- <a href="{{add_url}}" class="btn btn-success"><i class="material-icons">&#xE148;</i><span> ADICIONAR</span></a> -->
+                <!--<button class="btn btn-red btn-remove"><i class="material-icons">&#xE872;</i></button> -->
+
+                  <button class="btn btn-green btn-autorizar-viagem" ><i class="material-icons">check</i><span> Homologar</span></button>
+
+              </div>
+          </div>
+
+          <div class="body">
+
+           {% include 'base/search.html' %}
+
+           <div class="table-responsive">
+            <table id="lista-database" class="table table-bordered table-striped lista-table">
+              <thead>
+                <tr>
+                    <th>Solicitante</th>
+                    <th>Valor Da Passagem</th>
+                    <th>Data Inicio</th>
+                    <th>Data Fim</th>
+                    <th>Origem</th>
+                    <th>Destino</th>
+                    <th>Objetivo</th>
+                    <th>Tipo de Viagem</th>
+                    <th>Tipo de Solicitação</th>
+                    <th>Motivo</th>
+                    <th>Tipo de Transporte</th>
+                    <th>Autorizada</th>
+                    <th>Homologada</th>
+                  <th>Selecionar</th>
+                </tr>
+              </thead>
+
+              <tbody>
+               {% if all_natops%}
+               {% for natop in all_natops %}
+
+               <tr class="clickable-row"  data-href="{% url 'viagem:editarviagem' natop.id %}">
+                   <td>{{natop.solicitante}}</td>
+                   <td>{{natop.valor_passagem}}</td>
+                   <td>{{natop.dada_inicio}}</td>
+                   <td>{{natop.dada_fim}}</td>
+                   <td>{{natop.origem}}</td>
+                   <td>{{natop.destino}}</td>
+                   <td>{{natop.objetivo}}</td>
+                   <td>{{natop.tipo_viagem}}</td>
+                   <td>{{natop.tipo_solicitacao}}</td>
+                   <td>{{natop.motivo}}</td>
+                   <td>{{natop.tipo_transporte}}</td>
+                    <td>{{natop.autorizada}}</td>
+                   <td>{{natop.homologada}}</td>
+                <td class="lista-remove">
+                  <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
+                  <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>
+                </td>
+              </tr>
+              {% endfor %}
+              {%else%}
+              {%endif%}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+</div>
+</section>
+
+
+{%endblock%}

@@ -308,3 +308,42 @@ class ListAutorizarViagensView(CustomListView):
         context = super(ListAutorizarViagensView, self).get_context_data(**kwargs)
         context['title_complete'] = 'Viagens'
         return context
+
+
+
+
+class ListHomologarViagensView(CustomListView):
+    template_name = 'viagem/list_homologar_viagens.html'
+    model = ViagemModel
+    context_object_name = 'all_natops'
+    success_url = reverse_lazy('viagem:listahomologacaoviagem')
+    permission_codename = 'solicitar_viagens'
+
+    def get_queryset(self):
+        # return self.model.objects.all()
+        current_user = self.request.user
+        user_viagens = ViagemModel.objects.filter(autorizada=True)
+        user_viagens = user_viagens.filter(homologada=False)
+
+        return user_viagens
+    # Remover items selecionados da database
+    def post(self, request, *args, **kwargs):
+        if self.check_user_delete_permission(request, self.model):
+            # if self.check_user_permissions(self.request):
+            for key, value in request.POST.items():
+                if value == "on":
+                    instance = self.model.objects.get(id=key)
+                    instance.homologada = True
+                    instance.save()
+        return redirect(self.success_url)
+
+
+
+    def get_object(self):
+        current_user = self.request.user
+        return ViagemModel.objects.get(user=current_user)
+
+    def get_context_data(self, **kwargs):
+        context = super(ListHomologarViagensView, self).get_context_data(**kwargs)
+        context['title_complete'] = 'Viagens'
+        return context
