@@ -44,4 +44,7 @@ class ViagemModel(models.Model):
     tipo_solicitacao    = models.ForeignKey(TiposDeViagemModel, related_name="viagem_solicitacao", on_delete=models.CASCADE)
     motivo              = models.ForeignKey(MotivoDeViagemModel, related_name="viagem_motivo", on_delete=models.CASCADE)
     tipo_transporte     = models.ForeignKey(TipoDeTransporteModel, related_name="viagem_transporte", on_delete=models.CASCADE)
+    autorizada = models.BooleanField(default=False)
+    homologada = models.BooleanField(default=False)
+
 

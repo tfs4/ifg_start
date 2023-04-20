@@ -43,7 +43,9 @@
                     <th>Tipo de Solicitação</th>
                     <th>Motivo</th>
                     <th>Tipo de Transporte</th>
-                  <th>Remover</th>
+                    <th>Autorizada</th>
+                    <th>Homologada</th>
+                    <th>Remover</th>
                 </tr>
               </thead>
 
@@ -62,6 +64,8 @@
                    <td>{{natop.tipo_solicitacao}}</td>
                    <td>{{natop.motivo}}</td>
                    <td>{{natop.tipo_transporte}}</td>
+                   <td>{{natop.autorizada}}</td>
+                   <td>{{natop.homologada}}</td>
                 <td class="lista-remove">
                   <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
                   <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>

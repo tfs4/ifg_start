@@ -61,13 +61,16 @@ class CustomListView(CheckPermissionMixin, ListView):
 
     # Remover items selecionados da database
     def post(self, request, *args, **kwargs):
-        #if self.check_user_delete_permission(request, self.model):
-        if self.check_user_permissions(self.request):
+        if self.check_user_delete_permission(request, self.model):
+        #if self.check_user_permissions(self.request):
             for key, value in request.POST.items():
                 if value == "on":
                     instance = self.model.objects.get(id=key)
                     instance.delete()
         return redirect(self.success_url)
+
+
+
 
 
 class CustomUpdateView(CheckPermissionMixin, FormValidationMessageMixin, UpdateView):

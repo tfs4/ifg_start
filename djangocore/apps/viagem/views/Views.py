@@ -280,8 +280,20 @@ class ListAllViagensView(CustomListView):
     template_name = 'viagem/list_all_viagens.html'
     model = ViagemModel
     context_object_name = 'all_natops'
-    success_url = reverse_lazy('viagem:listaviagem')
+    success_url = reverse_lazy('viagem:listaallviagem')
     permission_codename = 'solicitar_viagens'
+
+    # Remover items selecionados da database
+    def post(self, request, *args, **kwargs):
+        if self.check_user_delete_permission(request, self.model):
+            # if self.check_user_permissions(self.request):
+            for key, value in request.POST.items():
+                if value == "on":
+                    instance = self.model.objects.get(id=key)
+                    instance.autorizada = True
+                    instance.save()
+        return redirect(self.success_url)
+
 
 
     def get_object(self):
@@ -291,5 +303,4 @@ class ListAllViagensView(CustomListView):
     def get_context_data(self, **kwargs):
         context = super(ListAllViagensView, self).get_context_data(**kwargs)
         context['title_complete'] = 'Viagens'
-        context['add_url'] = reverse_lazy('viagem:adicionarviagem')
         return context

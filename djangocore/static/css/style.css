@@ -536,6 +536,19 @@
       background-color: #ff968e !important;
       color: #fff !important; }
 
+
+.btn-green{
+  background-color: green;
+  color: #fff; }
+  .btn-green .content .text,
+  .btn-green .content .number {
+    color: #fff !important; }
+    .btn-green:hover,
+    .btn-green:active,
+    .btn-green:focus {
+      background-color: green !important;
+      color: #fff !important; }
+
 .btn{
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.16), 0 2px 10px rgba(0, 0, 0, 0.12);
   -webkit-border-radius: 2px;
@@ -991,8 +1004,9 @@ div.table-responsive > div.dataTables_wrapper > div.row > div[class^="col-"]:las
     .card .header a span{
       vertical-align: 2px; }
 
-.btn-remove-alert {
-        display: none; }
+.btn-remove-alert, .btn-autorizar-viagem {
+        display: none;
+}
 .card .body {
   font-size: 14px;
   color: #555;
