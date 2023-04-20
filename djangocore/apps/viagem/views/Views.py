@@ -274,11 +274,11 @@ class EditarViagemView(CustomUpdateView):
 
 
 
-class ListAllViagensView(CustomListView):
+class ListAutorizarViagensView(CustomListView):
     template_name = 'viagem/list_all_viagens.html'
     model = ViagemModel
     context_object_name = 'all_natops'
-    success_url = reverse_lazy('viagem:listaallviagem')
+    success_url = reverse_lazy('viagem:listaautorizarviagem')
     permission_codename = 'solicitar_viagens'
 
     def get_queryset(self):
@@ -305,6 +305,6 @@ class ListAllViagensView(CustomListView):
         return ViagemModel.objects.get(user=current_user)
 
     def get_context_data(self, **kwargs):
-        context = super(ListAllViagensView, self).get_context_data(**kwargs)
+        context = super(ListAutorizarViagensView, self).get_context_data(**kwargs)
         context['title_complete'] = 'Viagens'
         return context
