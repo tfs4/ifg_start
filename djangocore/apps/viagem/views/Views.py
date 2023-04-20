@@ -209,6 +209,15 @@ class ListViagensView(CustomListView):
     success_url = reverse_lazy('viagem:listaviagem')
     permission_codename = 'solicitar_viagens'
 
+    def get_queryset(self):
+        #return self.model.objects.all()
+        current_user = self.request.user
+        viagens = []
+        user_viagens = ViagemModel.objects.filter(solicitante=current_user)
+        lambda viagens: ViagemModel.objects.filter(solicitante=current_user) or []
+
+        return user_viagens
+
     def get_object(self):
         current_user = self.request.user
         return ViagemModel.objects.get(user=current_user)
