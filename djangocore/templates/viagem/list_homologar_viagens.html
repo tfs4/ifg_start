@@ -55,7 +55,7 @@
                {% if all_natops%}
                {% for natop in all_natops %}
 
-               <tr class="clickable-row"  data-href="{% url 'viagem:editarviagem' natop.id %}">
+               <tr >
                    <td>{{natop.solicitante}}</td>
                    <td>{{natop.valor_passagem}}</td>
                    <td>{{natop.dada_inicio}}</td>
