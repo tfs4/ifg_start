@@ -142,32 +142,37 @@ icones https://materializecss.com/icons.html
                             <span>Viagens</span>
                         </a>
                         <ul class="ml-menu">
-                            <li>
-                                <li>
-                                    <a href="{% url 'viagem:listatiposviagens' %}">
-                                         <span>Tipos de Viagens</span>
-                                    </a>
-                                </li>
+                            <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">&#xE1BD;</i>
+                            <span>Itens de Viagem</span>
+                        </a>
+                                <ul class="ml-menu">
+                                    <li>
+                                        <li>
+                                            <a href="{% url 'viagem:listatiposviagens' %}">
+                                                 <span>Tipos de Viagens</span>
+                                            </a>
+                                        </li>
 
-                                <li>
-                                    <a href="{% url 'viagem:listatiposolicitacao' %}">
-                                         <span>Tipos de Solicitação</span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="{% url 'viagem:listatiposolicitacao' %}">
+                                                 <span>Tipos de Solicitação</span>
+                                            </a>
+                                        </li>
 
 
-                                <li>
-                                    <a href="{% url 'viagem:listatipotransporte' %}">
-                                         <span>Tipos de Transporte</span>
-                                    </a>
-                                </li>
+                                        <li>
+                                            <a href="{% url 'viagem:listatipotransporte' %}">
+                                                 <span>Tipos de Transporte</span>
+                                            </a>
+                                        </li>
 
-                                <li>
-                                    <a href="{% url 'viagem:listamotivos' %}">
-                                         <span>Motivos De Viagem</span>
-                                    </a>
-                                </li>
-
+                                        <li>
+                                            <a href="{% url 'viagem:listamotivos' %}">
+                                                 <span>Motivos De Viagem</span>
+                                            </a>
+                                        </li>
+                                </ul>
 
                                 <li>
                                     <a href="{% url 'viagem:listaviagem' %}">
