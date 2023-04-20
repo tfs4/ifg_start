@@ -279,7 +279,7 @@ class ListAutorizarViagensView(CustomListView):
     model = ViagemModel
     context_object_name = 'all_natops'
     success_url = reverse_lazy('viagem:listaautorizarviagem')
-    permission_codename = 'solicitar_viagens'
+    permission_codename = 'autorizar_viagens'
 
     def get_queryset(self):
         # return self.model.objects.all()
@@ -289,9 +289,7 @@ class ListAutorizarViagensView(CustomListView):
         return user_viagens
     # Remover items selecionados da database
     def post(self, request, *args, **kwargs):
-        if self.check_user_delete_permission(request, self.model):
-            # if self.check_user_permissions(self.request):
-            for key, value in request.POST.items():
+        for key, value in request.POST.items():
                 if value == "on":
                     instance = self.model.objects.get(id=key)
                     instance.autorizada = True
@@ -317,7 +315,7 @@ class ListHomologarViagensView(CustomListView):
     model = ViagemModel
     context_object_name = 'all_natops'
     success_url = reverse_lazy('viagem:listahomologacaoviagem')
-    permission_codename = 'solicitar_viagens'
+    permission_codename = 'homologar_viagens'
 
     def get_queryset(self):
         # return self.model.objects.all()
@@ -328,9 +326,7 @@ class ListHomologarViagensView(CustomListView):
         return user_viagens
     # Remover items selecionados da database
     def post(self, request, *args, **kwargs):
-        if self.check_user_delete_permission(request, self.model):
-            # if self.check_user_permissions(self.request):
-            for key, value in request.POST.items():
+        for key, value in request.POST.items():
                 if value == "on":
                     instance = self.model.objects.get(id=key)
                     instance.homologada = True

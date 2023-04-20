@@ -31,6 +31,8 @@ class ViagemModel(models.Model):
         verbose_name = "Viagens"
         permissions = (
             ("solicitar_viagens", "Pode solicitar viagens"),
+            ("autorizar_viagens", "Pode autorizar viagens"),
+            ("homologar_viagens", "Pode homologar viagens"),
         )
 
     solicitante = models.ForeignKey(User, related_name="viagem_user", on_delete=models.CASCADE, null=True, blank=True)
