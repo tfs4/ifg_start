@@ -30,5 +30,7 @@ urlpatterns = [
     url(r'viagem/listarviagem/$', views.ListViagensView.as_view(), name='listaviagem'),
     url(r'viagem/adicionarviagem/$', views.AdicionarViagemView.as_view(), name='adicionarviagem'),
     url(r'viagem/editarviagem/(?P<pk>[0-9]+)/$', views.EditarViagemView.as_view(), name='editarviagem'),
+    url(r'viagem/listarallviagem/$', views.ListAllViagensView.as_view(), name='listaallviagem'),
+
 
 ]
