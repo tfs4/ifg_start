@@ -16,7 +16,7 @@ class ListTipoViagensView(CustomListView):
     model = TiposDeViagemModel
     context_object_name = 'all_natops'
     success_url = reverse_lazy('viagem:listatiposviagens')
-    permission_codename = 'view_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_context_data(self, **kwargs):
         context = super(ListTipoViagensView, self).get_context_data(**kwargs)
@@ -29,7 +29,7 @@ class AdicionarTipoViagemView(CustomCreateView):
     template_name = 'viagem/add.html'
     success_url = reverse_lazy('viagem:listatiposviagens')
     success_message = "Tipo de Viagem adicionado com sucesso."
-    permission_codename = 'add_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
@@ -46,7 +46,7 @@ class EditarTipoViagemView(CustomUpdateView):
     template_name = 'viagem/edit.html'
     success_url = reverse_lazy('viagem:listatiposviagens')
     success_message = "Tipo de Viagem Editado com Sucesso."
-    permission_codename = 'change_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
@@ -64,7 +64,7 @@ class ListTipoSolicitacaoView(CustomListView):
     model = TiposDeSolicitacaoModel
     context_object_name = 'all_natops'
     success_url = reverse_lazy('viagem:listatiposolicitacao')
-    permission_codename = 'view_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_context_data(self, **kwargs):
         context = super(ListTipoSolicitacaoView, self).get_context_data(**kwargs)
@@ -77,7 +77,7 @@ class AdicionarTipoSolicitacaoView(CustomCreateView):
     template_name = 'viagem/add.html'
     success_url = reverse_lazy('viagem:listatiposolicitacao')
     success_message = "Tipo de Solicitação adicionado com sucesso."
-    permission_codename = 'add_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
@@ -94,7 +94,7 @@ class EditarTipoSolicitacaoView(CustomUpdateView):
     template_name = 'viagem/edit.html'
     success_url = reverse_lazy('viagem:listatiposolicitacao')
     success_message = "Tipo de Solicitacao Editado com Sucesso."
-    permission_codename = 'change_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
@@ -111,7 +111,7 @@ class ListTipoTransporteView(CustomListView):
     model = TipoDeTransporteModel
     context_object_name = 'all_natops'
     success_url = reverse_lazy('viagem:listatipotransporte')
-    permission_codename = 'view_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_context_data(self, **kwargs):
         context = super(ListTipoTransporteView, self).get_context_data(**kwargs)
@@ -124,7 +124,7 @@ class AdicionarTipoTransporteView(CustomCreateView):
     template_name = 'viagem/add.html'
     success_url = reverse_lazy('viagem:listatipotransporte')
     success_message = "Tipo de Transporte adicionado com sucesso."
-    permission_codename = 'add_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
@@ -141,7 +141,7 @@ class EditarTipoTransporteView(CustomUpdateView):
     template_name = 'viagem/edit.html'
     success_url = reverse_lazy('viagem:listatipotransporte')
     success_message = "Tipo de Transporte Editado com Sucesso."
-    permission_codename = 'change_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
@@ -159,7 +159,7 @@ class ListMotivosView(CustomListView):
     model = MotivoDeViagemModel
     context_object_name = 'all_natops'
     success_url = reverse_lazy('viagem:listamotivos')
-    permission_codename = 'view_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_context_data(self, **kwargs):
         context = super(ListMotivosView, self).get_context_data(**kwargs)
@@ -172,7 +172,7 @@ class AdicionarMotivoView(CustomCreateView):
     template_name = 'viagem/add.html'
     success_url = reverse_lazy('viagem:listamotivos')
     success_message = "Motivo de Viagem adicionado com sucesso."
-    permission_codename = 'add_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
@@ -189,7 +189,7 @@ class EditarMotivoView(CustomUpdateView):
     template_name = 'viagem/edit.html'
     success_url = reverse_lazy('viagem:listamotivos')
     success_message = "Motivo de Viagem Editada com Sucesso."
-    permission_codename = 'change_naturezaoperacao'
+    permission_codename = 'cadastrar_item_viagens'
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)

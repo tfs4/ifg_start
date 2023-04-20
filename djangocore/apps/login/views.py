@@ -37,7 +37,7 @@ from functools import reduce
 
 DEFAULT_PERMISSION_MODELS = []
 
-CUSTOM_PERMISSIONS = [ 'solicitar_viagens', 'autorizar_viagens', 'homologar_viagens',]
+CUSTOM_PERMISSIONS = [ 'solicitar_viagens', 'autorizar_viagens', 'homologar_viagens', 'cadastrar_item_viagens',]
 
 
 class UserFormView(View):

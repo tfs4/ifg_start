@@ -33,6 +33,7 @@ class ViagemModel(models.Model):
             ("solicitar_viagens", "Pode solicitar viagens"),
             ("autorizar_viagens", "Pode autorizar viagens"),
             ("homologar_viagens", "Pode homologar viagens"),
+            ("cadastrar_item_viagens", "Cadastrar Items de Viagem")
         )
 
     solicitante = models.ForeignKey(User, related_name="viagem_user", on_delete=models.CASCADE, null=True, blank=True)
