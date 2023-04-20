@@ -212,9 +212,7 @@ class ListViagensView(CustomListView):
     def get_queryset(self):
         #return self.model.objects.all()
         current_user = self.request.user
-        viagens = []
         user_viagens = ViagemModel.objects.filter(solicitante=current_user)
-        lambda viagens: ViagemModel.objects.filter(solicitante=current_user) or []
 
         return user_viagens
 
@@ -283,6 +281,12 @@ class ListAllViagensView(CustomListView):
     success_url = reverse_lazy('viagem:listaallviagem')
     permission_codename = 'solicitar_viagens'
 
+    def get_queryset(self):
+        # return self.model.objects.all()
+        current_user = self.request.user
+        user_viagens = ViagemModel.objects.filter(autorizada=False)
+
+        return user_viagens
     # Remover items selecionados da database
     def post(self, request, *args, **kwargs):
         if self.check_user_delete_permission(request, self.model):
