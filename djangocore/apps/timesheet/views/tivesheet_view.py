@@ -62,12 +62,12 @@ class ListTimesheetView(CustomListViewFilter):
 
 
     def post(self, request, *args, **kwargs):
-        if self.check_user_delete_permission(request, self.model):
-            for key, value in request.POST.items():
-                if value == "on":
-                    instance = self.model.objects.get(id=key)
-                    instance.situacao = 1
-                    instance.save()
+        for key, value in request.POST.items():
+            print(key, value)
+            if value == "on":
+                instance = self.model.objects.get(id=key)
+                instance.situacao = 1
+                instance.save()
         return redirect(self.success_url)
 
     def get_context_data(self, **kwargs):

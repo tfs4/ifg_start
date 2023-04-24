@@ -3419,6 +3419,8 @@ $.Admin.autirizar_viagem = {
             $('#btn-sim').one('click', function(){
                 if($('#confirme_check_1').is(':checked'))
                 {
+                    form.attr('acao', 'remover');
+
                     form.submit();
                 }
             });
@@ -3456,15 +3458,45 @@ $.Admin.submeter_horas = {
         $btnAutoriza.on('click',function(event){
             event.preventDefault();
             var form = $(this).parents('form');
+            form.attr("action", "register.php?btnsubmit=Save")
+            form.submit();
+        });
+
+        $('body').on('click', '.clickable-row:not(.popup)', function(event){
+            if(!$(event.target).is("input, label, i, .prevent-click-row")){
+                window.document.location = $(this).data("href");
+            }
+        });
+
+    },
+}
+
+
+
+$.Admin.reover_opcao = {
+   init: function() {
+        var $btnAutoriza = $('.btn-submeter-horas');
+
+
+
+        $('body').on('change', '.lista-remove input[type=checkbox]', function(event){
+            if(this.checked){
+                $(this).parents('tr').addClass("delete-row");
+            }else{
+                $(this).parents('tr').removeClass("delete-row");
+            }
+            $btnAutoriza.show()
+        });
+
+        $btnAutoriza.on('click',function(event){
+            event.preventDefault();
+            var form = $(this).parents('form');
             form.submit();
 
 
 
         });
 
-
-
-        //Fazer a linha da table um link para a detail view
         $('body').on('click', '.clickable-row:not(.popup)', function(event){
             if(!$(event.target).is("input, label, i, .prevent-click-row")){
                 window.document.location = $(this).data("href");
@@ -3486,6 +3518,9 @@ $(function () {
     $.Admin.alert.init();
     $.Admin.autirizar_viagem.init();
     $.Admin.submeter_horas.init();
+    $.Admin.reover_opcao.init();
+
+
 
 
     setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
