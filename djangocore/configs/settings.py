@@ -77,6 +77,8 @@ INSTALLED_APPS = [
 
     'djangocore.apps.viagem',
 
+    'djangocore.apps.timesheet',
+
 
 ]
 

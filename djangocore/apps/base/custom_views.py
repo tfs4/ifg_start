@@ -28,13 +28,22 @@ class CustomDetailView(CheckPermissionMixin, DetailView):
 
 
 
-class CustomCreatePOSTView(CheckPermissionMixin, FormValidationMessageMixin, CreateView):
+class CustomCreateViewAddUser(CheckPermissionMixin, FormValidationMessageMixin, CreateView):
 
     def __init__(self, *args, **kwargs):
-        super(CustomCreatePOSTView, self).__init__(*args, **kwargs)
+        super(CustomCreateViewAddUser, self).__init__(*args, **kwargs)
 
     def post(self, request, *args, **kwargs):
-        return redirect(self.success_url)
+        self.object = None
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        if form.is_valid():
+            form.Meta.model.user = self.request.user
+            self.object = form.save()
+            return redirect(self.success_url)
+        return self.form_invalid(form)
+
+
 
 class CustomCreateView(CheckPermissionMixin, FormValidationMessageMixin, CreateView):
 
@@ -62,7 +71,6 @@ class CustomListView(CheckPermissionMixin, ListView):
     # Remover items selecionados da database
     def post(self, request, *args, **kwargs):
         if self.check_user_delete_permission(request, self.model):
-        #if self.check_user_permissions(self.request):
             for key, value in request.POST.items():
                 if value == "on":
                     instance = self.model.objects.get(id=key)
@@ -70,7 +78,25 @@ class CustomListView(CheckPermissionMixin, ListView):
         return redirect(self.success_url)
 
 
+class CustomListViewFilter(CheckPermissionMixin, ListView):
 
+    def __init__(self, *args, **kwargs):
+        super(CustomListViewFilter, self).__init__(*args, **kwargs)
+
+    def get_queryset(self):
+
+        print(self.request.user)
+        print(self.model.objects.filter(user=self.request.user))
+        return self.model.objects.all()
+
+    # Remover items selecionados da database
+    def post(self, request, *args, **kwargs):
+        if self.check_user_delete_permission(request, self.model):
+            for key, value in request.POST.items():
+                if value == "on":
+                    instance = self.model.objects.get(id=key)
+                    instance.delete()
+        return redirect(self.success_url)
 
 
 class CustomUpdateView(CheckPermissionMixin, FormValidationMessageMixin, UpdateView):

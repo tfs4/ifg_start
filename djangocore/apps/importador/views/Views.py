@@ -1,7 +1,7 @@
 
 from django.urls import reverse_lazy
 from siconfipy import get_fiscal, get_budget, br_cods, get_annual_acc
-from djangocore.apps.base.custom_views import CustomCreateView, CustomCreatePOSTView, CustomListView, CustomUpdateView
+from djangocore.apps.base.custom_views import CustomCreateView, CustomListView, CustomUpdateView
 
 from datetime import timedelta, date, datetime
 from djangocore.apps.importador.forms import *
@@ -71,7 +71,7 @@ class ListImportacoesView(CustomListView):
 
 
 
-class AddImportacoesView(CustomCreatePOSTView):
+class AddImportacoesView(CustomListView):
     form_class = ImportacaoForm
     template_name = "importador/add.html"
     success_url = reverse_lazy('importador:listimportacoes')
