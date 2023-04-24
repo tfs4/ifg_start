@@ -1,0 +1,92 @@
+{%extends 'base/base.html'%}
+
+{%block title%}{{title_complete|title}}{%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid lista">
+
+    {% include 'base/title_header.html' %}
+
+    {% include 'base/msg_sucesso.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 lista-content">
+      <div class="card">
+        <form action="" method="post">
+          {% csrf_token %}
+          <div class="header">
+            <h2>
+              {{title_complete}}
+            </h2>
+              <div class="header-btn">
+
+              </div>
+          </div>
+
+          <div class="body">
+
+           {% include 'base/search.html' %}
+
+           <div class="table-responsive">
+            <table id="lista-database" class="table table-bordered table-striped lista-table">
+              <thead>
+                <tr>
+                    <th>Solicitante</th>
+                    <th>Seg</th>
+                    <th>Ter</th>
+                    <th>Qua</th>
+                    <th>Qui</th>
+                    <th>Sex</th>
+                    <th>Sab</th>
+                    <th>Dom</th>
+                    <th>Semana</th>
+                    <th>Projeto</th>
+                    <th>Submetida</th>
+                    <th>Aprovada</th>
+                    <th>Reprovada</th>
+                    <th>APROVAR HORAS</th>
+                    <th>REPROVAR HORAS</th>
+
+
+                </tr>
+              </thead>
+
+              <tbody>
+               {% if all_natops%}
+               {% for natop in all_natops %}
+                 <tr>
+                   <td>{{natop.solicitante}}</td>
+                   <td>{{natop.hr_seg}}</td>
+                   <td>{{natop.hr_ter}}</td>
+                   <td>{{natop.hr_qua}}</td>
+                   <td>{{natop.hr_qui}}</td>
+                   <td>{{natop.hr_sex}}</td>
+                   <td>{{natop.hr_sab}}</td>
+                   <td>{{natop.hr_dom}}</td>
+                   <td>{{natop.semanas}}</td>
+                   <td>{{natop.projeto}}</td>
+                   <td>{{natop.submetida}}</td>
+                   <td>{{natop.aprovada}}</td>
+                   <td>{{natop.reprovada}}</td>
+                   <td><a href="{% url 'timesheet:aprovarhoras' natop.id %}" class="btn btn-success"><span> APROVAR HORAS</span></a></td>
+                   <td><a href="{% url 'timesheet:editatimesheet' natop.id %}" class="btn btn-success"><span> REPROVAR HORAS</span></a></td>
+
+              </tr>
+              {% endfor %}
+              {%else%}
+              {%endif%}
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+</div>
+
+</div>
+</section>
+
+
+{%endblock%}
