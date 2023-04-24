@@ -60,6 +60,16 @@ class ListTimesheetView(CustomListViewFilter):
         current_user = self.request.user
         return HorasSemanais.objects.all(user='1')
 
+
+    def post(self, request, *args, **kwargs):
+        if self.check_user_delete_permission(request, self.model):
+            for key, value in request.POST.items():
+                if value == "on":
+                    instance = self.model.objects.get(id=key)
+                    instance.situacao = 1
+                    instance.save()
+        return redirect(self.success_url)
+
     def get_context_data(self, **kwargs):
         context = super(ListTimesheetView, self).get_context_data(**kwargs, object_list=None)
         #context = self.get_object()
@@ -99,101 +109,4 @@ class AdicionarTimesheetView(CustomCreateViewAddUser):
         return context
 
 
-
-
-
-
-class SubmeterTimesheetView(CustomUpdateView):
-    form_class = HorasSemanaisForm
-    model = HorasSemanais
-    template_name = 'timesheet/timesheet_list.html'
-    success_url = reverse_lazy('timesheet:listatimesheet')
-    success_message = "Natureza da operação <b>%(cfop)s </b>editada com sucesso."
-    permission_codename = 'change_naturezaoperacao'
-    context_object_name = 'all_natops'
-
-    def get_queryset(self):
-        current_user = self.request.user
-        querry = HorasSemanais.objects.filter(solicitante=current_user)
-        # querry = querry.filter(submetida=False)
-
-        return querry
-
-
-    def get_success_message(self, cleaned_data):
-        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
-
-
-    def get_context_data(self, **kwargs):
-        context = super(SubmeterTimesheetView, self).get_context_data(**kwargs)
-        # context['object'].submetida = True
-        # context['object'].save()
-        # context['return_url'] = reverse_lazy('timesheet:listatimesheet')
-        context['return_url'] = reverse_lazy('timesheet:listatimesheet')
-        return context
-
-
-
-
-
-
-
-
-
-class EditarTimesheetView(CustomUpdateView):
-    form_class = HorasSemanaisForm
-    model = HorasSemanais
-   # template_name = "fiscal/natureza_operacao/natureza_operacao_edit.html"
-    template_name = 'timesheet/redirect_minhas_horas.html'
-    success_url = reverse_lazy('timesheet:listatimesheet')
-    success_message = "Natureza da operação <b>%(cfop)s </b>editada com sucesso."
-    permission_codename = 'change_naturezaoperacao'
-    context_object_name = 'all_natops'
-
-    def get_queryset(self):
-        current_user = self.request.user
-        querry = HorasSemanais.objects.filter(solicitante=current_user)
-        # querry = querry.filter(submetida=False)
-
-        return querry
-
-
-    def get_success_message(self, cleaned_data):
-        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
-
-
-    def get_context_data(self, **kwargs):
-        context = super(EditarTimesheetView, self).get_context_data(**kwargs)
-        context['object'].submetida = True
-        context['object'].save()
-        context['return_url'] = reverse_lazy('timesheet:listatimesheet')
-        return context
-
-class AprovarHorasView(CustomUpdateView):
-         form_class = HorasSemanaisForm
-         model = HorasSemanais
-         template_name = 'timesheet/redirect.html'
-         success_url = reverse_lazy('timesheet:aprovartimesheet')
-         success_message = "Natureza da operação <b>%(cfop)s </b>editada com sucesso."
-         permission_codename = 'change_naturezaoperacao'
-
-         def get_success_message(self, cleaned_data):
-             return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
-
-         def get_queryset(self):
-             querry = HorasSemanais.objects.filter(submetida=True)
-             return querry
-
-         def get(self, request, *args, **kwargs):
-             self.object = self.get_object()
-             return super().get(request, *args, **kwargs)
-
-         def get_context_data(self, **kwargs):
-             context = super(AprovarHorasView, self).get_context_data(**kwargs)
-             context['object'].aprovada = True
-             context['object'].reprovada = False
-             context['object'].save()
-             context['return_url'] = reverse_lazy('timesheet:aprovartimesheet')
-
-             return context
 

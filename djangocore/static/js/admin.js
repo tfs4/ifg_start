@@ -3455,14 +3455,11 @@ $.Admin.submeter_horas = {
 
         $btnAutoriza.on('click',function(event){
             event.preventDefault();
-            //|hidden|collapse|initial|inherit
-            $('#confirm_check_item_1').css("visibility", "visible");
             var form = $(this).parents('form');
+            form.submit();
 
-            $.Admin.messages.msgConfirm("Tem certeza que deseja excluir este item?");
-            $('#btn-sim').one('click', function(){
-                form.submit();
-            });
+
+
         });
 
 

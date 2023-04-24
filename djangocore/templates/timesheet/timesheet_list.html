@@ -18,8 +18,8 @@
               {{title_complete}}
             </h2>
               <div class="header-btn">
-                    <a href="{{add_url}}" class="btn btn-success"><i class="material-icons">&#xE148;</i><span> ADICIONAR</span></a>
-                  <button class="btn btn-red ">Submeter</button>
+                  <a href="{{add_url}}" class="btn btn-success"><i class="material-icons">&#xE148;</i><span> ADICIONAR</span></a>
+                  <button class="btn btn-success btn-submeter-horas"><i class="material-icons">check</i><span> SUBMETER</span></button>
                   <button class="btn btn-red btn-submeter-horas"><i class="material-icons">&#xE872;</i></button>
               </div>
           </div>
@@ -41,7 +41,6 @@
                     <th>Dom</th>
                     <th>Semana</th>
                     <th>Projeto</th>
-                    <th>Submetida</th>
                     <th>Situação</th>
                     <th>Remover</th>
 
@@ -62,7 +61,6 @@
                    <td>{{natop.semanas}}</td>
                    <td>{{natop.projeto}}</td>
                    <td>{{natop.situacao}}</td>
-                   <td><a href="{% url 'timesheet:submetertimesheet' natop.id %}" class="btn btn-success"><span> SUBMETER HORAS</span></a></td>
 
                <td class="lista-remove">
                   <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
