@@ -151,3 +151,21 @@ class PrestacaoContaForm(forms.ModelForm):
         }
 
 
+
+class ArquivosForm(forms.ModelForm):
+
+    class Meta:
+        model = Arquivos
+
+        fields = ('descricao', 'file',)
+
+        widgets = {
+            'descricao': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
+            'file': forms.FileInput(attrs={'class': 'form-control'}),
+        }
+        labels = {
+            'descricao': _('Descrição'),
+            'file': _('Arquivo'),
+        }
+
+

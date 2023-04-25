@@ -37,6 +37,11 @@ class TipoDeTransporteModel(models.Model):
         return self.nome
 
 
+class Arquivos(models.Model):
+    descricao = models.TextField(blank=True, null=True)
+    file =  models.FileField(upload_to='files/', null=True, blank=True)
+
+
 class ViagemModel(models.Model):
     class Meta:
         verbose_name = "Viagens"

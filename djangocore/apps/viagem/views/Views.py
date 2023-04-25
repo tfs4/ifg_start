@@ -8,6 +8,10 @@ from django.shortcuts import redirect
 
 from djangocore.apps.viagem.forms import *
 from djangocore.apps.viagem.models import *
+import random
+import string
+
+
 
 
 #### Tipos de Viagens
@@ -377,11 +381,38 @@ class PrestarContasView(CustomUpdateView):
 
 
 
+class ArquivosViagemView(CustomCreateView):
+    form_class = ArquivosForm
+    template_name = 'viagem/add_files.html'
+    success_url = reverse_lazy('viagem:arquivosviagem')
+    success_message = "Arquivos da Viagem"
+    permission_codename = 'cadastrar_item_viagens'
 
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
 
+    def post(self, request, *args, **kwargs):
+        self.object = None
 
+        form = ArquivosForm(request.POST, request.FILES, instance=self.object)
 
+        letters = string.ascii_lowercase
+        name = ''.join(random.choice(letters) for i in range(20))
+        nome_antigo = request.FILES['file'].name
+        nome_antigo = nome_antigo.split('.')
+        ext = nome_antigo[-1]
 
+        if form.is_valid():
+            request.FILES['file'].name = name+'.'+ext
+            self.object = form.save()
+            return redirect(self.success_url)
+        return self.form_invalid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super(ArquivosViagemView, self).get_context_data(**kwargs)
+        context['title_complete'] = 'ADICIONAR ARQUIVOS'
+        context['return_url'] = reverse_lazy('viagem:arquivosviagem')
+        return context
 
 
 

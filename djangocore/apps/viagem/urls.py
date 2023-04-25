@@ -34,5 +34,7 @@ urlpatterns = [
     url(r'viagem/listarhomologarviagem/$', views.ListHomologarViagensView.as_view(), name='listahomologacaoviagem'),
     url(r'viagem/prestar_contas/(?P<pk>[0-9]+)/$', views.PrestarContasView.as_view(), name='prestar_contas'),
 
+    url(r'viagem/arquivosviagem/$', views.ArquivosViagemView.as_view(), name='arquivosviagem'),
+
 
 ]
