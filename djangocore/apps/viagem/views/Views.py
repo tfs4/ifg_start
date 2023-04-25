@@ -216,6 +216,16 @@ class ListViagensView(CustomListView):
 
         return user_viagens
 
+    def post(self, request, *args, **kwargs):
+        if self.check_user_delete_permission(request, self.model):
+            for key, value in request.POST.items():
+                if value == "on":
+                    instance = self.model.objects.get(id=key)
+                    if not instance.autorizada and  not instance.homologada:
+                        instance.delete()
+
+        return redirect(self.success_url)
+
     def get_object(self):
         current_user = self.request.user
         return ViagemModel.objects.get(user=current_user)
