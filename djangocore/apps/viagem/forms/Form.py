@@ -125,19 +125,16 @@ class ViagemForm(forms.ModelForm):
 
 class PrestacaoContaForm(forms.ModelForm):
 
-
     class Meta:
         CHOICES = [
             (True,  'Finalizar'),
             (False, 'Aguardar'),
         ]
-
         model = ViagemModel
         fields = ('pagamento',
                   'descricao',
                   'finalizar_pc',)
         widgets = {
-
             'pagamento': forms.Select(attrs={'class': 'form-control select-produto'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'size': '200'}),
             'finalizar_pc': forms.Select(attrs={'class': 'form-control select-produto'}),
@@ -146,17 +143,12 @@ class PrestacaoContaForm(forms.ModelForm):
             'pagamento': _('Forma de Pagamento'),
             'descricao': _('Descrição da Viagem'),
             'finalizar_pc': _('Finalizar Prestação de Contas'),
-
-
         }
-
-
 
 class ArquivosForm(forms.ModelForm):
 
     class Meta:
         model = Arquivos
-
         fields = ('descricao', 'file',)
 
         widgets = {

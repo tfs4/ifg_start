@@ -364,13 +364,39 @@ class ListHomologarViagensView(CustomListView):
 class PrestarContasView(CustomUpdateView):
     form_class = PrestacaoContaForm
     model = ViagemModel
+    form_2 = ArquivosForm
     template_name = 'viagem/edit.html'
     success_url = reverse_lazy('viagem:listaviagem')
     success_message = "Viagem Editada com Sucesso."
     permission_codename = 'solicitar_viagens'
 
 
+    def post(self, request, *args, **kwargs):
+        #arquivo = request.FILES['file']
+        if request.FILES:
+            self.object = None
 
+            form = ArquivosForm(request.POST, request.FILES, instance=self.object)
+
+            letters = string.ascii_lowercase
+            name = ''.join(random.choice(letters) for i in range(20))
+            nome_antigo = request.FILES['file'].name
+            nome_antigo = nome_antigo.split('.')
+            ext = nome_antigo[-1]
+
+            if form.is_valid():
+                request.FILES['file'].name = name + '.' + ext
+                self.object = form.save()
+                return redirect(self.success_url)
+            return self.form_invalid(form)
+        else:
+            self.object = self.get_object()
+            form_class = self.get_form_class()
+            form = form_class(request.POST, instance=self.object)
+            if form.is_valid():
+                self.object = form.save()
+                return redirect(self.success_url)
+            return self.form_invalid(form)
 
 
     def get_success_message(self, cleaned_data):
@@ -378,6 +404,7 @@ class PrestarContasView(CustomUpdateView):
 
     def get_context_data(self, **kwargs):
         context = super(PrestarContasView, self).get_context_data(**kwargs)
+        context['form_2'] = self.form_2
         context['return_url'] = reverse_lazy('viagem:listaviagem')
         return context
 
