@@ -68,6 +68,7 @@ class ViagemModel(models.Model):
     pagamento = models.CharField(max_length=50, null=True, blank=True, choices=PAGAMENTO)
     descricao = models.TextField(blank=True, null=True)
     finalizar_pc =  models.CharField(max_length=50, null=True, blank=True, choices=BOOLEANO, default='0')
+    arquivos = models.ForeignKey(Arquivos, related_name="arquivos_voagem", null=True, on_delete=models.CASCADE)
 
 
 

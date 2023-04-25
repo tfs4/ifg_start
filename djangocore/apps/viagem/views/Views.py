@@ -369,6 +369,10 @@ class PrestarContasView(CustomUpdateView):
     success_message = "Viagem Editada com Sucesso."
     permission_codename = 'solicitar_viagens'
 
+
+
+
+
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
 
@@ -387,6 +391,9 @@ class ArquivosViagemView(CustomCreateView):
     success_url = reverse_lazy('viagem:arquivosviagem')
     success_message = "Arquivos da Viagem"
     permission_codename = 'cadastrar_item_viagens'
+
+
+
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
