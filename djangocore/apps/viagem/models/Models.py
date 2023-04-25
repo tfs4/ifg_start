@@ -1,6 +1,12 @@
 from django.db import models
 from django.contrib.auth.models import User
 
+
+PAGAMENTO = [
+    ('RECURSOS DA EMPRESA', 'RECURSOS DA EMPRESA'),
+    ('RECURSOS PRÓPRIOS', 'RECURSOS PRÓPRIOS'),
+]
+
 class TiposDeViagemModel(models.Model):
     nome = models.CharField(max_length=200)
 
@@ -50,4 +56,10 @@ class ViagemModel(models.Model):
     autorizada = models.BooleanField(default=False)
     homologada = models.BooleanField(default=False)
 
+
+
+class PrestarContasModel(models.Model):
+    viagem = models.ForeignKey(ViagemModel, related_name="viagem_contas", on_delete=models.CASCADE)
+    pagamento = models.CharField(max_length=50, null=True, blank=True, choices=PAGAMENTO)
+    descricao = models.TextField(blank=True, null=True)
 

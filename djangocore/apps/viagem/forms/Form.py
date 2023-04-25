@@ -119,3 +119,21 @@ class ViagemForm(forms.ModelForm):
             instance.save()
         return instance
 
+
+class PrestarContasForm(forms.ModelForm):
+    class Meta:
+        model = PrestarContasModel
+        fields = ('pagamento',
+                  'descricao',
+                  )
+        widgets = {
+
+            'pagamento': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
+            'descricao': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
+        }
+        labels = {
+            'pagamento': _('Forma de Pagamento'),
+            'descricao': _('Descrição'),
+
+        }
+
