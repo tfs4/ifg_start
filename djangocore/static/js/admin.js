@@ -3411,19 +3411,8 @@ $.Admin.autirizar_viagem = {
 
         $btnAutoriza.on('click',function(event){
             event.preventDefault();
-            //|hidden|collapse|initial|inherit
-            $('#confirm_check_item_1').css("visibility", "visible");
             var form = $(this).parents('form');
-
-            $.Admin.messages.msgConfirm("Tem certeza que deseja excluir este item?");
-            $('#btn-sim').one('click', function(){
-                if($('#confirme_check_1').is(':checked'))
-                {
-                    form.attr('acao', 'remover');
-
-                    form.submit();
-                }
-            });
+            form.submit();
         });
 
 
