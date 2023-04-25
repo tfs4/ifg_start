@@ -69,9 +69,14 @@
                    <td>{{natop.autorizada}}</td>
                    <td>{{natop.homologada}}</td>
                    <td>
-                       {% if natop.autorizada and natop.homologada %}
+                       {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '0' %}
                             <a href="{% url 'viagem:prestar_contas' natop.id %}" class="btn btn-success"><span> PRESTAR CONTAS</span></a>
                        {% endif %}
+                       {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '1' %}
+                            AGUARDANDO PROVAÇÂO
+                       {% endif %}
+
+
                    </td>
 
 

@@ -7,6 +7,11 @@ PAGAMENTO = [
     ('RECURSOS PRÓPRIOS', 'RECURSOS PRÓPRIOS'),
 ]
 
+BOOLEANO = [
+    ('1', 'SIM'),
+    ('0', 'NAO'),
+]
+
 class TiposDeViagemModel(models.Model):
     nome = models.CharField(max_length=200)
 
@@ -57,6 +62,7 @@ class ViagemModel(models.Model):
     homologada = models.BooleanField(default=False)
     pagamento = models.CharField(max_length=50, null=True, blank=True, choices=PAGAMENTO)
     descricao = models.TextField(blank=True, null=True)
+    finalizar_pc =  models.CharField(max_length=50, null=True, blank=True, choices=BOOLEANO, default='0')
 
 
 
