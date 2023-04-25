@@ -3458,7 +3458,15 @@ $.Admin.submeter_horas = {
         $btnAutoriza.on('click',function(event){
             event.preventDefault();
             var form = $(this).parents('form');
-            form.attr("action", "register.php?btnsubmit=Save")
+
+
+            var input = $("<input>")
+                   .attr("type", "hidden")
+                   .attr("name", "acao").val("submeter_horas");
+
+            form.append($(input));
+
+
             form.submit();
         });
 
@@ -3475,7 +3483,7 @@ $.Admin.submeter_horas = {
 
 $.Admin.reover_opcao = {
    init: function() {
-        var $btnAutoriza = $('.btn-submeter-horas');
+        var $btnAutoriza = $('.btn-remover-submeter-horas');
 
 
 
@@ -3491,6 +3499,14 @@ $.Admin.reover_opcao = {
         $btnAutoriza.on('click',function(event){
             event.preventDefault();
             var form = $(this).parents('form');
+
+            var input = $("<input>")
+                   .attr("type", "hidden")
+                   .attr("name", "acao").val("excluir");
+
+            form.append($(input));
+
+
             form.submit();
 
 
@@ -3505,7 +3521,6 @@ $.Admin.reover_opcao = {
 
     },
 }
-
 
 
 $(function () {
