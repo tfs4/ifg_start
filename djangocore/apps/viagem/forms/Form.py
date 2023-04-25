@@ -120,20 +120,25 @@ class ViagemForm(forms.ModelForm):
         return instance
 
 
-class PrestarContasForm(forms.ModelForm):
+
+
+
+class PrestacaoContaForm(forms.ModelForm):
+
     class Meta:
-        model = PrestarContasModel
+        model = ViagemModel
         fields = ('pagamento',
-                  'descricao',
-                  )
+                  'descricao', )
         widgets = {
 
-            'pagamento': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
-            'descricao': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
+            'pagamento': forms.Select(attrs={'class': 'form-control select-produto'}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'size': '200'}),
         }
         labels = {
             'pagamento': _('Forma de Pagamento'),
-            'descricao': _('Descrição'),
+            'descricao': _('Descrição da Viagem'),
+
 
         }
+
 

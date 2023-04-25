@@ -353,3 +353,54 @@ class ListHomologarViagensView(CustomListView):
         context = super(ListHomologarViagensView, self).get_context_data(**kwargs)
         context['title_complete'] = 'Viagens'
         return context
+
+
+
+
+class PrestarContasView(CustomUpdateView):
+    form_class = PrestacaoContaForm
+    model = ViagemModel
+    template_name = 'viagem/edit.html'
+    success_url = reverse_lazy('viagem:listaviagem')
+    success_message = "Viagem Editada com Sucesso."
+    permission_codename = 'solicitar_viagens'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+
+    def get_context_data(self, **kwargs):
+        context = super(PrestarContasView, self).get_context_data(**kwargs)
+        context['return_url'] = reverse_lazy('viagem:listaviagem')
+        return context
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

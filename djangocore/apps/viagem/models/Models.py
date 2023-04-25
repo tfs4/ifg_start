@@ -55,11 +55,8 @@ class ViagemModel(models.Model):
     tipo_transporte     = models.ForeignKey(TipoDeTransporteModel, related_name="viagem_transporte", on_delete=models.CASCADE)
     autorizada = models.BooleanField(default=False)
     homologada = models.BooleanField(default=False)
-
-
-
-class PrestarContasModel(models.Model):
-    viagem = models.ForeignKey(ViagemModel, related_name="viagem_contas", on_delete=models.CASCADE)
     pagamento = models.CharField(max_length=50, null=True, blank=True, choices=PAGAMENTO)
     descricao = models.TextField(blank=True, null=True)
+
+
 

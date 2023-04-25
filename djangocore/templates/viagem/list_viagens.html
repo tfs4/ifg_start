@@ -70,7 +70,7 @@
                    <td>{{natop.homologada}}</td>
                    <td>
                        {% if natop.autorizada and natop.homologada %}
-                            <a href="{{add_url}}" class="btn btn-success"><span> PRESTAR CONTAS</span></a>
+                            <a href="{% url 'viagem:prestar_contas' natop.id %}" class="btn btn-success"><span> PRESTAR CONTAS</span></a>
                        {% endif %}
                    </td>
 
