@@ -426,6 +426,27 @@ class ArquivosViagemView(CustomCreateView):
 
 
 
+    def get(self, request, *args, **kwargs):
+        self.object = None
+        obj = super().get(request, *args, **kwargs)
+        # viagem = ViagemModel.objects.get(id=45)
+        # # form_class = ArquivosForm(initial={'viagem': viagem})
+        # obj.context_data['form'](initial={'viagem': viagem})
+
+        # current_user = self.request.user
+        # lviagems = ViagemModel.objects.get(id=45)
+        # #lviagems = ViagemModel.objects.filter(solicitante=current_user)
+        # valor = obj.context_data['form'].fields['viagem'] = lviagems
+        return obj
+
+    # def get_queryset(self):
+    #     # # return self.model.objects.all()
+    #     # current_user = self.request.user
+    #     # user_viagens = ArquivosForm.objects.filter(autorizada=True)
+    #     # user_viagens = user_viagens.filter(homologada=False)
+    #     return self.model.objects.all()
+
+
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
@@ -433,7 +454,9 @@ class ArquivosViagemView(CustomCreateView):
     def post(self, request, *args, **kwargs):
         self.object = None
 
-        form = ArquivosForm(request.POST, request.FILES, instance=self.object)
+        my_object = ViagemModel.objects.get(pk=45)
+        form_data = {'viagem': my_object.pk}
+        form = ArquivosForm(request.POST or None, request.FILES, instance=self.object, id_viagem=45)
 
         letters = string.ascii_lowercase
         name = ''.join(random.choice(letters) for i in range(20))

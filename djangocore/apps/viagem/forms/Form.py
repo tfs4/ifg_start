@@ -147,6 +147,10 @@ class PrestacaoContaForm(forms.ModelForm):
 
 class ArquivosForm(forms.ModelForm):
 
+    # def __init__(self, *args, **kwargs):
+    #     super(ArquivosForm, self).__init__(*args, **kwargs)
+    #     self.fields['viagem'].initial = ViagemModel.objects.get(id=45)
+
     class Meta:
         model = Arquivos
         fields = ('descricao', 'file', 'viagem',)
