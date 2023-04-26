@@ -365,7 +365,7 @@ class PrestarContasView(CustomUpdateView):
     form_class = PrestacaoContaForm
     model = ViagemModel
     form_2 = ArquivosForm
-    template_name = 'viagem/edit.html'
+    template_name = 'viagem/prestacao_de_contas.html'
     success_url = reverse_lazy('viagem:listaviagem')
     success_message = "Viagem Editada com Sucesso."
     permission_codename = 'solicitar_viagens'
@@ -387,7 +387,6 @@ class PrestarContasView(CustomUpdateView):
                 request.FILES['file'].name = name + '.' + ext
 
                 self.object = self.get_object()
-                form_class = self.get_form_class()
                 form.instance.viagem = ViagemModel.objects.get(pk=kwargs['pk'])
                 self.object = form.save()
                 return redirect(self.success_url)
@@ -409,6 +408,12 @@ class PrestarContasView(CustomUpdateView):
         context = super(PrestarContasView, self).get_context_data(**kwargs)
         context['form_2'] = self.form_2
         context['return_url'] = reverse_lazy('viagem:listaviagem')
+        #Arquivos.objects.get(pk=kwargs['pk'])
+        #viagem = ViagemModel.objects.get(pk=kwargs['pk'])
+
+
+        context['arquivos'] = Arquivos.objects.filter(viagem=context['object'])
+
         return context
 
 
