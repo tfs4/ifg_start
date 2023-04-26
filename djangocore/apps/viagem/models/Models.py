@@ -37,12 +37,32 @@ class TipoDeTransporteModel(models.Model):
         return self.nome
 
 
-class Arquivos(models.Model):
-    descricao = models.TextField(blank=True, null=True)
-    file =  models.FileField(upload_to='files/', null=True, blank=True)
+
 
 
 class ViagemModel(models.Model):
+    solicitante = models.ForeignKey(User, related_name="viagem_user", on_delete=models.CASCADE, null=True, blank=True)
+    valor_passagem = models.CharField(max_length=200)
+    dada_inicio = models.DateTimeField()
+    dada_fim = models.DateField()
+    origem = models.CharField(max_length=200)
+    destino = models.CharField(max_length=200)
+    objetivo = models.CharField(max_length=200)
+    tipo_viagem = models.ForeignKey(TiposDeViagemModel, related_name="viagem_tipo", on_delete=models.CASCADE)
+    tipo_solicitacao = models.ForeignKey(TiposDeViagemModel, related_name="viagem_solicitacao",
+                                         on_delete=models.CASCADE)
+    motivo = models.ForeignKey(MotivoDeViagemModel, related_name="viagem_motivo", on_delete=models.CASCADE)
+    tipo_transporte = models.ForeignKey(TipoDeTransporteModel, related_name="viagem_transporte",
+                                        on_delete=models.CASCADE)
+    autorizada = models.BooleanField(default=False)
+    homologada = models.BooleanField(default=False)
+    pagamento = models.CharField(max_length=50, null=True, blank=True, choices=PAGAMENTO)
+    descricao = models.TextField(blank=True, null=True)
+    finalizar_pc = models.CharField(max_length=50, null=True, blank=True, choices=BOOLEANO, default='0')
+
+    def __str__(self):
+        return self.origem+' - '+self.destino+' ( '+str(self.dada_inicio)+' - '+str(self.dada_fim)+' )'
+
     class Meta:
         verbose_name = "Viagens"
         permissions = (
@@ -52,23 +72,11 @@ class ViagemModel(models.Model):
             ("cadastrar_item_viagens", "Cadastrar Items de Viagem")
         )
 
-    solicitante = models.ForeignKey(User, related_name="viagem_user", on_delete=models.CASCADE, null=True, blank=True)
-    valor_passagem = models.CharField(max_length=200)
-    dada_inicio =  models.DateTimeField()
-    dada_fim =  models.DateField()
-    origem = models.CharField(max_length=200)
-    destino = models.CharField(max_length=200)
-    objetivo = models.CharField(max_length=200)
-    tipo_viagem         = models.ForeignKey(TiposDeViagemModel, related_name="viagem_tipo", on_delete=models.CASCADE)
-    tipo_solicitacao    = models.ForeignKey(TiposDeViagemModel, related_name="viagem_solicitacao", on_delete=models.CASCADE)
-    motivo              = models.ForeignKey(MotivoDeViagemModel, related_name="viagem_motivo", on_delete=models.CASCADE)
-    tipo_transporte     = models.ForeignKey(TipoDeTransporteModel, related_name="viagem_transporte", on_delete=models.CASCADE)
-    autorizada = models.BooleanField(default=False)
-    homologada = models.BooleanField(default=False)
-    pagamento = models.CharField(max_length=50, null=True, blank=True, choices=PAGAMENTO)
+
+
+
+
+class Arquivos(models.Model):
     descricao = models.TextField(blank=True, null=True)
-    finalizar_pc =  models.CharField(max_length=50, null=True, blank=True, choices=BOOLEANO, default='0')
-    arquivos = models.ForeignKey(Arquivos, related_name="arquivos_voagem", null=True, on_delete=models.CASCADE)
-
-
-
+    file =  models.FileField(upload_to='files/', null=True, blank=True)
+    viagem = models.ForeignKey(ViagemModel, related_name="arquivos_viagem", null=True, on_delete=models.CASCADE)

@@ -149,15 +149,17 @@ class ArquivosForm(forms.ModelForm):
 
     class Meta:
         model = Arquivos
-        fields = ('descricao', 'file',)
+        fields = ('descricao', 'file', 'viagem',)
 
         widgets = {
             'descricao': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
             'file': forms.FileInput(attrs={'class': 'form-control'}),
+            'viagem': forms.Select(attrs={'class': 'form-control select-produto'}),
         }
         labels = {
             'descricao': _('Descrição'),
             'file': _('Arquivo'),
+            'viagem': _('Viagem'),
         }
 
 

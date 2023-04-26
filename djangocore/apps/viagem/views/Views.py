@@ -386,9 +386,14 @@ class PrestarContasView(CustomUpdateView):
 
             if form.is_valid():
                 request.FILES['file'].name = name + '.' + ext
+
+                self.object = self.get_object()
+                form_class = self.get_form_class()
+                form_viagem = form_class(request.POST, instance=self.object)
+                form.Meta.model.viagem = self.model
                 self.object = form.save()
                 return redirect(self.success_url)
-            return self.form_invalid(form)
+            #return self.form_invalid(form)
         else:
             self.object = self.get_object()
             form_class = self.get_form_class()
