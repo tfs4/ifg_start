@@ -375,7 +375,6 @@ class PrestarContasView(CustomUpdateView):
         #arquivo = request.FILES['file']
         if request.FILES:
             self.object = None
-
             form = ArquivosForm(request.POST, request.FILES, instance=self.object)
 
             letters = string.ascii_lowercase
@@ -389,8 +388,7 @@ class PrestarContasView(CustomUpdateView):
 
                 self.object = self.get_object()
                 form_class = self.get_form_class()
-                form_viagem = form_class(request.POST, instance=self.object)
-                form.Meta.model.viagem = self.model
+                form.instance.viagem = ViagemModel.objects.get(pk=kwargs['pk'])
                 self.object = form.save()
                 return redirect(self.success_url)
             #return self.form_invalid(form)
@@ -454,10 +452,9 @@ class ArquivosViagemView(CustomCreateView):
     def post(self, request, *args, **kwargs):
         self.object = None
 
-        my_object = ViagemModel.objects.get(pk=45)
-        form_data = {'viagem': my_object.pk}
-        form = ArquivosForm(request.POST or None, request.FILES, instance=self.object, id_viagem=45)
 
+        form = ArquivosForm(request.POST, request.FILES, instance=self.object)
+        form.instance.viagem = ViagemModel.objects.get(pk=45)
         letters = string.ascii_lowercase
         name = ''.join(random.choice(letters) for i in range(20))
         nome_antigo = request.FILES['file'].name
