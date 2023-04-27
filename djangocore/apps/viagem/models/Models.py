@@ -77,6 +77,6 @@ class ViagemModel(models.Model):
 
 
 class Arquivos(models.Model):
-    descricao = models.TextField(blank=True, null=True)
-    file =  models.FileField(upload_to='files/', null=True, blank=True)
+    descricao = models.TextField(blank=False, null=False)
+    file =  models.FileField(upload_to='files/', null=False, blank=False)
     viagem = models.ForeignKey(ViagemModel, related_name="arquivos_viagem", null=True, on_delete=models.CASCADE)
