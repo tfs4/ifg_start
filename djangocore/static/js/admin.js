@@ -3511,7 +3511,56 @@ $.Admin.reover_opcao = {
     },
 }
 
+$.Admin.alert_file = {
+   init: function() {
+        var $btnRemove = $('.btn-remove-alert-file');
 
+
+//Confirmou se temos independência para emitir esta proposta?
+//
+// Você fez uma anális de background check para aceitar esse cliente?
+
+       //Mudar o background do tr quando remover for selecionado
+        $('body').on('change', '.lista-remove input[type=checkbox]', function(event){
+            if(this.checked){
+                $(this).parents('tr').addClass("delete-row");
+            }else{
+                $(this).parents('tr').removeClass("delete-row");
+            }
+            $btnRemove.show()
+        });
+
+        $btnRemove.on('click',function(event){
+            event.preventDefault();
+            //|hidden|collapse|initial|inherit
+            $('#confirm_check_item_1').css("visibility", "visible");
+            var form = $(this).parents('form');
+            $.Admin.messages.msgConfirm("Tem certeza que deseja excluir este item?");
+            $('#btn-sim').one('click', function(){
+                if($('#confirme_check_1').is(':checked'))
+                {
+
+                    var input = $("<input>")
+                   .attr("type", "hidden")
+                   .attr("name", "acao").val("excluir_arquivo");
+
+
+                    form.submit();
+                }
+            });
+        });
+
+
+
+        //Fazer a linha da table um link para a detail view
+        $('body').on('click', '.clickable-row:not(.popup)', function(event){
+            if(!$(event.target).is("input, label, i, .prevent-click-row")){
+                window.document.location = $(this).data("href");
+            }
+        });
+
+    },
+}
 $(function () {
     $.Admin.barraLateral.init();
     $.Admin.navbar.init();
@@ -3523,9 +3572,7 @@ $(function () {
     $.Admin.autirizar_viagem.init();
     $.Admin.submeter_horas.init();
     $.Admin.reover_opcao.init();
-
-
-
+    $.Admin.alert_file.init();
 
     setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
 });
