@@ -47,6 +47,7 @@
                     <th>Autorizada</th>
                     <th>Homologada</th>
                     <th>PRESTAR CONTAS</th>
+                    <th>ARQUIVOS</th>
                     <th>Remover</th>
                 </tr>
               </thead>
@@ -75,10 +76,15 @@
                        {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '1' %}
                             AGUARDANDO PROVAÇÂO
                        {% endif %}
-
-
                    </td>
-
+                    <td>
+                       {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '0' %}
+                            <a href="{% url 'viagem:enviar_arquivos' natop.id %}" class="btn btn-success"><span> ENVIAR ARQUIVOS </span></a>
+                       {% endif %}
+                       {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '1' %}
+                            AGUARDANDO PROVAÇÂO
+                       {% endif %}
+                   </td>
 
                 <td class="lista-remove">
                                 {% if natop.autorizada or natop.homologada %}
