@@ -33,7 +33,15 @@ urlpatterns = [
     url(r'viagem/listarautorizarviagem/$', views.ListAutorizarViagensView.as_view(), name='listaautorizarviagem'),
     url(r'viagem/listarhomologarviagem/$', views.ListHomologarViagensView.as_view(), name='listahomologacaoviagem'),
     url(r'viagem/prestar_contas/(?P<pk>[0-9]+)/$', views.PrestarContasView.as_view(), name='prestar_contas'),
-    url(r'viagem/enviar_arquivos/(?P<pk>[0-9]+)/$', views.EnviarArquivosView.as_view(), name='enviar_arquivos'),
+    url(r'viagem/prestar_contas_arquivos/(?P<pk>[0-9]+)/$', views.PrestarContasArquivosView.as_view(), name='prestar_contas_arquivos'),
+
+
+
+
+
+
+    url(r'viagem/enviar_arquivos/$', views.EnviarArquivosView.as_view(), name='enviar_arquivos'),
+   # url(r'viagem/arquivosviagem/(?P<pk>[0-9]+)/$', views.ArquivosViagemView.as_view(), name='arquivosviagem'),
     url(r'viagem/arquivosviagem/$', views.ArquivosViagemView.as_view(), name='arquivosviagem'),
 
 

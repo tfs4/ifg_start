@@ -79,7 +79,7 @@
                    </td>
                     <td>
                        {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '0' %}
-                            <a href="{% url 'viagem:enviar_arquivos' natop.id %}" class="btn btn-success"><span> ENVIAR ARQUIVOS </span></a>
+                            <a href="{% url 'viagem:prestar_contas_arquivos'  natop.id %}" class="btn btn-success"><span> ENVIAR ARQUIVOS </span></a>
                        {% endif %}
                        {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '1' %}
                             AGUARDANDO PROVAÇÂO
