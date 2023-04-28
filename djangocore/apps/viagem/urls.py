@@ -35,6 +35,8 @@ urlpatterns = [
     url(r'viagem/prestar_contas/(?P<pk>[0-9]+)/$', views.PrestarContasView.as_view(), name='prestar_contas'),
     url(r'viagem/prestar_contas_arquivos/(?P<pk>[0-9]+)/$', views.PrestarContasArquivosView.as_view(), name='prestar_contas_arquivos'),
 
+    url(r'viagem/remover_arquivo/(?P<pk>[0-9]+)/$', views.RemoverArquivoView.as_view(), name='remover_arquivo'),
+
 
 
 

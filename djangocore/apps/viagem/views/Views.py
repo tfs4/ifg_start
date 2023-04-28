@@ -419,6 +419,31 @@ class PrestarContasView(CustomUpdateView):
 
 #######################################################################################
 
+
+
+class RemoverArquivoView(CustomUpdateView):
+    form_class = ArquivosForm
+    model = Arquivos
+    template_name = 'viagem/edit.html'
+    success_url = reverse_lazy('viagem:listaviagem')
+    success_message = "Viagem Editada com Sucesso."
+    permission_codename = 'solicitar_viagens'
+
+    def get_success_message(self, cleaned_data):
+        print('aqui')
+        objetos = self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+        return objetos
+
+    def get_context_data(self, **kwargs):
+        context = super(RemoverArquivoView, self).get_context_data(**kwargs)
+        context['object'].delete()
+        # instance = self.model.objects.get(id=key)
+        # instance.delete()
+        url = reverse_lazy('viagem:prestar_contas_arquivos', kwargs={'pk': kwargs['pk']}, )
+        return redirect(url)
+
+
+
 class PrestarContasArquivosView(CustomUpdateView):
     form_class = PrestacaoContaForm
     model = ViagemModel

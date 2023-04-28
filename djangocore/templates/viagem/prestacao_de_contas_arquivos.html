@@ -70,12 +70,11 @@
                        {% if arquivos%}
                        {% for natop in arquivos %}
 
-                       <tr class="clickable-row"  data-href="{% url 'flavio:editaflavio' natop.id %}">
+                       <tr>
                         <td>{{natop.descricao}}</td>
                         <td><a href="{{natop.file.url}}">Download</a></td>
                         <td class="lista-remove">
-                          <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
-                          <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>
+                          <a href="{% url 'viagem:remover_arquivo' natop.id %}" class="btn btn-red  btn-success"><i class="material-icons">&#xE872;</i><span> REMOVER</span></a>
                         </td>
                       </tr>
                       {% endfor %}
