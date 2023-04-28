@@ -430,27 +430,25 @@ class PrestarContasArquivosView(CustomUpdateView):
 
     def post(self, request, *args, **kwargs):
 
-        acao = request.POST['acao']
-        if acao == 'excluir_arquivo':
-            print('excluir')
-        else:
-            self.object = None
-            form = ArquivosForm(request.POST, request.FILES, instance=self.object)
-            letters = string.ascii_lowercase
-            name = ''.join(random.choice(letters) for i in range(20))
-            nome_antigo = request.FILES['file'].name
-            nome_antigo = nome_antigo.split('.')
-            ext = nome_antigo[-1]
 
-            if form.is_valid():
 
-                request.FILES['file'].name = name + '.' + ext
-                self.object = self.get_object()
-                form.instance.viagem = ViagemModel.objects.get(pk=kwargs['pk'])
-                self.object = form.save()
-                url = reverse_lazy('viagem:prestar_contas_arquivos', kwargs={'pk': kwargs['pk']}, )
-                return redirect(url)
-                #return self.form_invalid(form)
+        self.object = None
+        form = ArquivosForm(request.POST, request.FILES, instance=self.object)
+        letters = string.ascii_lowercase
+        name = ''.join(random.choice(letters) for i in range(20))
+        nome_antigo = request.FILES['file'].name
+        nome_antigo = nome_antigo.split('.')
+        ext = nome_antigo[-1]
+
+        if form.is_valid():
+
+            request.FILES['file'].name = name + '.' + ext
+            self.object = self.get_object()
+            form.instance.viagem = ViagemModel.objects.get(pk=kwargs['pk'])
+            self.object = form.save()
+            url = reverse_lazy('viagem:prestar_contas_arquivos', kwargs={'pk': kwargs['pk']}, )
+            return redirect(url)
+            #return self.form_invalid(form)
 
 
     def get_success_message(self, cleaned_data):
