@@ -74,7 +74,7 @@
                         <td>{{natop.descricao}}</td>
                         <td><a href="{{natop.file.url}}">Download</a></td>
                         <td class="lista-remove">
-                          <a href="{% url 'viagem:remover_arquivo' natop.id %}" class="btn btn-red  btn-success"><i class="material-icons">&#xE872;</i><span> REMOVER</span></a>
+                          <a href="{% url 'viagem:remover_arquivo' natop.id  viagem_pk %}" class="btn btn-red  btn-success"><i class="material-icons">&#xE872;</i><span> REMOVER</span></a>
                         </td>
                       </tr>
                       {% endfor %}
@@ -83,7 +83,6 @@
                     </tbody>
                   </table>
                 </div>
-
               </div>
           </form>
         <!-- ###################################################################### -->
