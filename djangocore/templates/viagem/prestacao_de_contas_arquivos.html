@@ -50,47 +50,40 @@
 
 
         <!-- ###################################################################### -->
-        <form role="form" action=""  method="post">
-            {% csrf_token %}
-                <div class="header">
-                  <div class="header-btn">
-                    <button class="btn btn-red btn-remove-alert-file" ><i class="material-icons">&#xE872;</i></button>
-                  </div>
-                </div>
+      <div class="body">
 
-               <div class="table-responsive">
-                <table id="lista-database" class="table table-bordered table-striped lista-table">
-                  <thead>
-                    <tr>
-                        <th>Descrição</th>
-                        <th>File</th>
-                      <th>Remover</th>
-                    </tr>
-                  </thead>
+           {% include 'base/search.html' %}
 
-                  <tbody>
-                   {% if arquivos%}
-                   {% for natop in arquivos %}
+           <div class="table-responsive">
+            <table id="lista-database" class="table table-bordered table-striped lista-table">
+              <thead>
+                <tr>
+                  <th>Descrição</th>
+                  <th>Arquivo</th>
+                  <th>Remover</th>
+                </tr>
+              </thead>
 
-                   <tr>
-                        <td>{{natop.descricao}}</td>
-                        <td><a href="{{natop.file.url}}"> Download </a></td>
+              <tbody>
+               {% if arquivos%}
+               {% for natop in arquivos %}
 
-                    <td class="lista-remove">
-                      <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
-                      <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>
-                    </td>
-                  </tr>
-                  {% endfor %}
-                  {%else%}
-                  {%endif%}
-                </tbody>
-              </table>
-            </div>
-
+               <tr class="clickable-row"  data-href="{% url 'flavio:editaflavio' natop.id %}">
+                <td>{{natop.descricao}}</td>
+                <td><a href="{{natop.file.url}}">Download</a></td>
+                <td class="lista-remove">
+                  <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
+                  <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>
+                </td>
+              </tr>
+              {% endfor %}
+              {%else%}
+              {%endif%}
+            </tbody>
+          </table>
+        </div>
 
       </div>
-  </form>
         <!-- ###################################################################### -->
         </div>
       </div>
