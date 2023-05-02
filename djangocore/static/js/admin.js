@@ -3561,6 +3561,93 @@ $.Admin.alert_file = {
 
     },
 }
+
+
+$.Admin.aprovar_pc = {
+   init: function() {
+        var $btnAutoriza = $('.btn-aprovar_pc');
+
+
+
+        $('body').on('change', '.lista-remove input[type=checkbox]', function(event){
+            if(this.checked){
+                $(this).parents('tr').addClass("delete-row");
+            }else{
+                $(this).parents('tr').removeClass("delete-row");
+            }
+            $btnAutoriza.show()
+        });
+
+        $btnAutoriza.on('click',function(event){
+            event.preventDefault();
+            var form = $(this).parents('form');
+
+
+             var input = $("<input>")
+                   .attr("type", "hidden")
+                   .attr("name", "acao").val("aprovar_pc");
+
+            form.append($(input));
+            form.submit();
+        });
+
+
+
+        //Fazer a linha da table um link para a detail view
+        $('body').on('click', '.clickable-row:not(.popup)', function(event){
+            if(!$(event.target).is("input, label, i, .prevent-click-row")){
+                window.document.location = $(this).data("href");
+            }
+        });
+
+    },
+}
+
+$.Admin.reprovar_pc = {
+   init: function() {
+        var $btnAutoriza = $('.btn-reprovar_pc');
+
+
+
+        $('body').on('change', '.lista-remove input[type=checkbox]', function(event){
+            if(this.checked){
+                $(this).parents('tr').addClass("delete-row");
+            }else{
+                $(this).parents('tr').removeClass("delete-row");
+            }
+            $btnAutoriza.show()
+        });
+
+        $btnAutoriza.on('click',function(event){
+            event.preventDefault();
+            var form = $(this).parents('form');
+
+
+            var input = $("<input>")
+                   .attr("type", "hidden")
+                   .attr("name", "acao").val("reprovar_pc");
+
+            form.append($(input));
+            form.submit();
+        });
+
+
+
+        //Fazer a linha da table um link para a detail view
+        $('body').on('click', '.clickable-row:not(.popup)', function(event){
+            if(!$(event.target).is("input, label, i, .prevent-click-row")){
+                window.document.location = $(this).data("href");
+            }
+        });
+
+    },
+}
+
+
+
+
+
+
 $(function () {
     $.Admin.barraLateral.init();
     $.Admin.navbar.init();
@@ -3573,6 +3660,8 @@ $(function () {
     $.Admin.submeter_horas.init();
     $.Admin.reover_opcao.init();
     $.Admin.alert_file.init();
+    $.Admin.aprovar_pc.init();
+    $.Admin.reprovar_pc.init();
 
     setTimeout(function () { $('.page-loader-wrapper').fadeOut(); }, 50);
 });

@@ -12,6 +12,12 @@ BOOLEANO = [
     ('0', 'NAO'),
 ]
 
+PC = [
+    ('2', 'REPROVADO'),
+    ('1', 'APROVADO'),
+    ('0', 'EM ANÁLISE'),
+]
+
 class TiposDeViagemModel(models.Model):
     nome = models.CharField(max_length=200)
 
@@ -63,6 +69,7 @@ class ViagemModel(models.Model):
     dada_fim_realizada   = models.DateField(null=True, blank=True)
     remarcacao_interesse_particular = models.CharField(max_length=50, null=False, blank=False, choices=BOOLEANO, default=0)
     finalizar_pc = models.CharField(max_length=50, null=True, blank=True, choices=BOOLEANO, default='0')
+    aprovar_pc = models.CharField(max_length=50, null=True, blank=True, choices=PC, default='0')
 
     def __str__(self):
         return self.origem+' - '+self.destino+' ( '+str(self.dada_inicio)+' - '+str(self.dada_fim)+' )'

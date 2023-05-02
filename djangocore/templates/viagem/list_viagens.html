@@ -48,6 +48,7 @@
                     <th>Homologada</th>
                     <th>PRESTAR CONTAS</th>
                     <th>ARQUIVOS</th>
+                     <th>AVALIAÇÃO</th>
                     <th>Remover</th>
                 </tr>
               </thead>
@@ -74,7 +75,7 @@
                             <a href="{% url 'viagem:prestar_contas' natop.id %}" class="btn btn-success"><span> PRESTAR CONTAS</span></a>
                        {% endif %}
                        {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '1' %}
-                            AGUARDANDO PROVAÇÂO
+                           Enviado Para Aprovação
                        {% endif %}
                    </td>
                     <td>
@@ -82,7 +83,15 @@
                             <a href="{% url 'viagem:prestar_contas_arquivos'  natop.id %}" class="btn btn-success"><span> ENVIAR ARQUIVOS </span></a>
                        {% endif %}
                        {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '1' %}
-                            AGUARDANDO PROVAÇÂO
+                            Enviado Para Aprovação
+                       {% endif %}
+                   </td>
+               <td>
+                       {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '0' %}
+                            <a href="{% url 'viagem:prestar_contas_arquivos'  natop.id %}" class="btn btn-success"><span> ENVIAR ARQUIVOS </span></a>
+                       {% endif %}
+                       {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '1' %}
+                            Enviado Para Aprovação
                        {% endif %}
                    </td>
 

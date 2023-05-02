@@ -1,0 +1,80 @@
+{%extends 'base/base.html'%}
+
+
+{%block title%} {{form.cfop.value}} {%endblock%}
+{%block content%}
+<section class="content">
+  <div class="container-fluid">
+
+    {% include 'base/title_header.html' %}
+
+    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+      <div class="row">
+        <div class="card">
+
+          <!--Header-->
+          <div class="header">
+
+            <h2>
+              <a href="{{return_url}}"><i class="material-icons">&#xE5C4;</i></a>{{form.cfop.value}}
+            </h2>
+            <div><small>Campos marcados com <strong style="color:red;">*</strong> são obrigatórios.</small></div>
+
+          </div>
+          <form role="form" action=""  method="post">
+            {% csrf_token %}
+              <div class="body">
+
+                   {% include 'base/search.html' %}
+
+                   <div class="table-responsive">
+                    <table id="lista-database" class="table table-bordered table-striped lista-table">
+                      <thead>
+                        <tr>
+                          <th>Descrição</th>
+                          <th>Arquivo</th>
+
+                        </tr>
+                      </thead>
+
+                      <tbody>
+                       {% if arquivos%}
+                       {% for natop in arquivos %}
+
+                       <tr>
+                        <td>{{natop.descricao}}</td>
+                        <td><a href="{{natop.file.url}}">Download</a></td>
+                      </tr>
+                      {% endfor %}
+                      {%else%}
+                      {%endif%}
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+          </form>
+        <!-- ###################################################################### -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+{%endblock%}
+
+{% block js %}
+    
+  {% load static %}
+  <!-- JQuery UI Css/Js -->
+  <link href="{% static 'css/jquery-ui/jquery-ui.min.css' %}" rel="stylesheet">
+  <script src="{% static 'js/jquery-ui.min.js' %}"></script>
+
+  <script type="text/javascript">
+    var cfop_path = '{% static 'tabelas/cfop/cfop_2015_002.csv' %}'
+    $.Admin.autocompleteField.autocompleteCfop(cfop_path);
+    
+  </script>
+  
+{% endblock %}

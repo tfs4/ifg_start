@@ -186,3 +186,96 @@ class ArquivosForm(forms.ModelForm):
         }
 
 
+class AvaliarPrestacaoContaForm(forms.ModelForm):
+
+    # def __init__(self, *args, **kwargs):
+    #     super(AvaliarPrestacaoContaForm, self).__init__(*args, **kwargs)
+    #     self.fields['<field_to_disable>'].disabled = True
+    '''
+        dada_inicio_realizada = models.DateTimeField()
+       dada_fim_realizada   = models.DateField()
+       remarcacao_interesse_particular = models.BooleanField(default=False)
+
+       '''
+
+    class Meta:
+        model = ViagemModel
+        fields = ('pagamento',
+                  'dada_inicio_realizada',
+                  'dada_fim_realizada',
+                  'remarcacao_interesse_particular',
+                  'descricao',
+                  'finalizar_pc',
+
+                  )
+        widgets = {
+            'pagamento': forms.Select(attrs={'class': 'form-control select-produto' , "disabled":"disabled"}),
+            'dada_inicio_realizada': DateInput(format=["%d-%m-%Y"], attrs={'class': 'form-control', 'size': '200', "disabled":"disabled"}),
+            'dada_fim_realizada': DateInput(format=["%d-%m-%Y"], attrs={'class': 'form-control', 'size': '200', 'style': 'disabled: true;', "disabled":"disabled"}),
+            'remarcacao_interesse_particular': forms.Select(attrs={'class': 'form-control select-produto', 'style': 'disabled: true;', "disabled":"disabled"}),
+            'descricao': forms.Textarea(attrs={'class': 'form-control', 'size': '200', 'style': 'disabled: true;', "disabled":"disabled"}),
+            'finalizar_pc': forms.Select(attrs={'class': 'form-control select-produto', 'style': 'disabled: true;', "disabled":"disabled"}),
+
+        }
+        labels = {
+            'pagamento': _('Forma de Pagamento'),
+            'dada_inicio_realizada': _('Data realizada de inicio'),
+            'dada_fim_realizada': _('Data realizada de fim'),
+            'remarcacao_interesse_particular': _('Remarcação por interesse particular'),
+            'descricao': _('Descrição da Viagem'),
+            'finalizar_pc': _('Finalizar Prestação de Contas'),
+
+        }
+
+
+
+class AvaliarSolicitacaoViagemForm(forms.ModelForm):
+
+    # def __init__(self, *args, **kwargs):
+    #     super(AvaliarPrestacaoContaForm, self).__init__(*args, **kwargs)
+    #     self.fields['<field_to_disable>'].disabled = True
+    '''
+        dada_inicio_realizada = models.DateTimeField()
+       dada_fim_realizada   = models.DateField()
+       remarcacao_interesse_particular = models.BooleanField(default=False)
+
+       '''
+
+    class Meta:
+        model = ViagemModel
+        fields = ('valor_passagem',
+                  'dada_inicio',
+                  'dada_fim',
+                  'origem',
+                  'destino',
+                  'objetivo',
+                  'tipo_viagem',
+                  'tipo_solicitacao',
+                  'motivo',
+                  'tipo_transporte',)
+        widgets = {
+
+            'valor_passagem': forms.TextInput(attrs={'class': 'form-control', 'size': '200', "disabled":"disabled"}),
+            'dada_inicio': DateInput(format=["%d-%m-%Y"], attrs={'class': 'form-control', 'size': '200', "disabled":"disabled"}),
+            'dada_fim': DateInput(format=["%d-%m-%Y"], attrs={'class': 'form-control', 'size': '200', "disabled":"disabled"}),
+            'origem': forms.TextInput(attrs={'class': 'form-control', 'size': '200', "disabled":"disabled"}),
+            'destino': forms.TextInput(attrs={'class': 'form-control', 'size': '200', "disabled":"disabled"}),
+            'objetivo': forms.TextInput(attrs={'class': 'form-control', 'size': '200', "disabled":"disabled"}),
+            'tipo_viagem': forms.Select(attrs={'class': 'form-control select-produto', "disabled":"disabled"}),
+            'tipo_solicitacao': forms.Select(attrs={'class': 'form-control select-produto, "disabled":"disabled"'}),
+            'motivo': forms.Select(attrs={'class': 'form-control select-produto', "disabled":"disabled"}),
+            'tipo_transporte': forms.Select(attrs={'class': 'form-control select-produto, "disabled":"disabled"'}),
+        }
+        labels = {
+            'valor_passagem': _('Valor da Passagem'),
+            'dada_inicio': _('Data Inicio'),
+            'dada_fim': _('Data Fim'),
+            'origem': _('Origem'),
+            'destino': _('Destino'),
+            'objetivo': _('Objetivo'),
+            'tipo_viagem': _('Tipo de Viagem'),
+            'tipo_solicitacao': _('Tipo de Solicitação'),
+            'motivo': _('Motivo'),
+            'tipo_transporte': _('Tipo de Transporte'),
+
+        }
