@@ -481,7 +481,7 @@ class PrestarContasArquivosView(CustomUpdateView):
         pk = self.kwargs['pk']
         context = super(PrestarContasArquivosView, self).get_context_data(**kwargs)
         context['form_2'] = self.form_2
-        context['return_url'] = reverse_lazy('viagem:prestar_contas_arquivos', kwargs={'pk': pk},)
+        context['return_url'] = reverse_lazy('viagem:listaviagem')
         context['viagem_pk'] = pk
         context['arquivos'] = Arquivos.objects.filter(viagem=context['object'])
 

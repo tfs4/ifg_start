@@ -87,11 +87,11 @@
                        {% endif %}
                    </td>
                <td>
-                       {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '0' %}
-                            <a href="{% url 'viagem:prestar_contas_arquivos'  natop.id %}" class="btn btn-success"><span> ENVIAR ARQUIVOS </span></a>
+                       {% if natop.aprovar_pc == '1' %}
+                            PRESTAÇÃO DE CONTAS APROVADA
                        {% endif %}
-                       {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '1' %}
-                            Enviado Para Aprovação
+                       {% if natop.aprovar_pc == '2' %}
+                            PRESTAÇÃO DE CONTAS REPROVADA
                        {% endif %}
                    </td>
 
