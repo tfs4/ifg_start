@@ -34,16 +34,11 @@
             <table id="lista-database" class="table table-bordered table-striped lista-table">
               <thead>
                 <tr>
-                    <th>Valor Da Passagem</th>
+
                     <th>Data Inicio</th>
                     <th>Data Fim</th>
                     <th>Origem</th>
                     <th>Destino</th>
-                    <th>Objetivo</th>
-                    <th>Tipo de Viagem</th>
-                    <th>Tipo de Solicitação</th>
-                    <th>Motivo</th>
-                    <th>Tipo de Transporte</th>
                     <th>Autorizada</th>
                     <th>Homologada</th>
                     <th>PRESTAR CONTAS</th>
@@ -58,18 +53,19 @@
                {% for natop in all_natops %}
 
                <tr >
-                   <td>{{natop.valor_passagem}}</td>
                    <td>{{natop.dada_inicio}}</td>
                    <td>{{natop.dada_fim}}</td>
                    <td>{{natop.origem}}</td>
                    <td>{{natop.destino}}</td>
-                   <td>{{natop.objetivo}}</td>
-                   <td>{{natop.tipo_viagem}}</td>
-                   <td>{{natop.tipo_solicitacao}}</td>
-                   <td>{{natop.motivo}}</td>
-                   <td>{{natop.tipo_transporte}}</td>
-                   <td>{{natop.autorizada}}</td>
-                   <td>{{natop.homologada}}</td>
+                   <td>
+                        {% if natop.autorizada  %}
+                            <a class="btn btn-success"><span> AUTORIZADA</span></a>
+                       {% endif %}
+
+                   <td>
+                       {% if natop.homologada  %}
+                            <a class="btn btn-success"><span> HOMOLOGADA</span></a>
+                       {% endif %}</td>
                    <td>
                        {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '0' %}
                             <a href="{% url 'viagem:prestar_contas' natop.id %}" class="btn btn-success"><span> PRESTAR CONTAS</span></a>
@@ -88,10 +84,12 @@
                    </td>
                <td>
                        {% if natop.aprovar_pc == '1' %}
-                            PRESTAÇÃO DE CONTAS APROVADA
+                            <a class="btn btn-success"><span> PROVADA</span></a>
+
                        {% endif %}
                        {% if natop.aprovar_pc == '2' %}
-                            PRESTAÇÃO DE CONTAS REPROVADA
+                           <a class="btn btn-red btn-success"><span>REPROVADA</span></a>
+
                        {% endif %}
                    </td>
 
