@@ -89,8 +89,8 @@ class ViagemForm(forms.ModelForm):
         widgets = {
 
             'valor_passagem': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
-            'dada_inicio': DateInput(format=["%Y-%m-%d"], attrs={'class': 'form-control', 'size': '200'}),
-            'dada_fim': DateInput(format=["%Y-%m-%d"], attrs={'class': 'form-control', 'size': '200'}),
+            'dada_inicio': DateInput(format=["%d-%m-%Y"], attrs={'class': 'form-control', 'size': '200'}),
+            'dada_fim': DateInput(format=["%d-%m-%Y"], attrs={'class': 'form-control', 'size': '200'}),
             'origem': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
             'destino': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
             'objetivo': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
@@ -125,24 +125,42 @@ class ViagemForm(forms.ModelForm):
 
 class PrestacaoContaForm(forms.ModelForm):
 
+    '''
+     dada_inicio_realizada = models.DateTimeField()
+    dada_fim_realizada   = models.DateField()
+    remarcacao_interesse_particular = models.BooleanField(default=False)
+
+    '''
+
     class Meta:
-        CHOICES = [
-            (True,  'Finalizar'),
-            (False, 'Aguardar'),
-        ]
         model = ViagemModel
         fields = ('pagamento',
+                  'dada_inicio_realizada',
+                  'dada_fim_realizada',
+                  'remarcacao_interesse_particular',
                   'descricao',
-                  'finalizar_pc',)
+                  'finalizar_pc',
+
+                 )
         widgets = {
             'pagamento': forms.Select(attrs={'class': 'form-control select-produto'}),
+            'dada_inicio_realizada': DateInput(format=["%d-%m-%Y"], attrs={'class': 'form-control', 'size': '200'}),
+            'dada_fim_realizada': DateInput(format=["%d-%m-%Y"], attrs={'class': 'form-control', 'size': '200'}),
+            'remarcacao_interesse_particular': forms.Select(attrs={'class': 'form-control select-produto'}),
             'descricao': forms.Textarea(attrs={'class': 'form-control', 'size': '200'}),
             'finalizar_pc': forms.Select(attrs={'class': 'form-control select-produto'}),
+
         }
         labels = {
             'pagamento': _('Forma de Pagamento'),
+            'dada_inicio_realizada': _('Data realizada de inicio'),
+            'dada_fim_realizada': _('Data realizada de fim'),
+            'remarcacao_interesse_particular': _('Remarcação por interesse particular'),
             'descricao': _('Descrição da Viagem'),
             'finalizar_pc': _('Finalizar Prestação de Contas'),
+
+
+
         }
 
 class ArquivosForm(forms.ModelForm):

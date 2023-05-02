@@ -58,6 +58,10 @@ class ViagemModel(models.Model):
     homologada = models.BooleanField(default=False)
     pagamento = models.CharField(max_length=50, null=True, blank=True, choices=PAGAMENTO)
     descricao = models.TextField(blank=True, null=True)
+
+    dada_inicio_realizada = models.DateTimeField(null=True, blank=True)
+    dada_fim_realizada   = models.DateField(null=True, blank=True)
+    remarcacao_interesse_particular = models.CharField(max_length=50, null=False, blank=False, choices=BOOLEANO, default=0)
     finalizar_pc = models.CharField(max_length=50, null=True, blank=True, choices=BOOLEANO, default='0')
 
     def __str__(self):
