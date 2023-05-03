@@ -59,7 +59,7 @@ class HorasSemanais(models.Model):
     pode_null = False
     branco = True
 
-    hr_seg = models.CharField(max_length=200, null=pode_null, blank=branco)
+    hr_seg = models.TimeField(null=True)
     hr_ter = models.CharField(max_length=200, null=pode_null, blank=branco)
     hr_qua = models.CharField(max_length=200, null=pode_null, blank=branco)
     hr_qui = models.CharField(max_length=200, null=pode_null, blank=branco)

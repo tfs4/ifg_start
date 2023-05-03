@@ -23,7 +23,7 @@ class HorasSemanaisForm(forms.ModelForm):
             'semanas': forms.Select(attrs={'class': 'form-control'}),
             #'projeto': forms.Select(attrs={'class': 'form-control'}),
 
-            'hr_seg': forms.DateTimeInput(attrs={'type': 'time', 'class': 'form-control decimal-mask'}),
+            'hr_seg': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control decimal-mask'}),
             'hr_ter': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control decimal-mask'}),
             'hr_qua': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control decimal-mask'}),
             'hr_qui': forms.TimeInput(attrs={'type': 'time', 'class': 'form-control decimal-mask'}),
