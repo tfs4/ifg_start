@@ -90,7 +90,7 @@ class GastosForm(forms.ModelForm):
         }
 
     def save(self, commit=True):
-        instance = super(HorasSemanaisForm, self).save(commit=False)
+        instance = super(GastosForm, self).save(commit=False)
         instance.solicitante = self.request_user
         if commit:
             instance.save()

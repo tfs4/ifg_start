@@ -166,6 +166,21 @@ class ListGastosView(CustomListViewFilter):
         #querry = querry.filter(submetida=False)
         return querry
 
+    def post(self, request, *args, **kwargs):
+        if self.check_user_delete_permission(request, self.model):
+            for key, value in request.POST.items():
+                if value == "on":
+                    acao = request.POST['acao']
+
+                    if 'acao' in request.POST:
+                        if acao == 'submeter_gastos':
+                            instance = self.model.objects.get(id=key)
+                            instance.situacao = 1
+                            instance.save()
+                    else:
+                        instance = self.model.objects.get(id=key)
+                        instance.delete()
+        return redirect(self.success_url)
 
     def get_context_data(self, **kwargs):
         context = super(ListGastosView, self).get_context_data(**kwargs, object_list=None)
@@ -183,6 +198,17 @@ class AdicionarGastoView(CustomCreateView):
     success_url = reverse_lazy('timesheet:listargastos')
     success_message = "Adicionar Exemplo <b>%(cfop)s </b>adicionado com sucesso."
     permission_codename = 'add_naturezaoperacao'
+
+    def post(self, request, *args, **kwargs):
+        self.object = None
+
+        form_class = self.get_form_class()
+        form = self.get_form(form_class)
+        form.request_user = self.request.user
+        if form.is_valid():
+            self.object = form.save()
+            return redirect(self.success_url)
+        return self.form_invalid(form)
 
     def get_success_message(self, cleaned_data):
         return self.success_message % dict(cleaned_data, cfop=self.object.cfop)

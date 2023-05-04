@@ -80,7 +80,12 @@ class HorasSemanais(models.Model):
     # reprovada = models.BooleanField(default=False)
 
 
-
+SITUACAO = [
+    ('3', 'REPROVADA'),
+    ('2', 'APROVADA'),
+    ('1', 'SUBMETIDA'),
+    ('0', 'NÃO SUBMETIDA'),
+]
 
 class Gastos(models.Model):
 
@@ -89,5 +94,8 @@ class Gastos(models.Model):
     solicitante = models.ForeignKey(User, related_name="gastos_user", on_delete=models.CASCADE, null=True, blank=True)
     valor = models.CharField(max_length=10, null=False, blank=False)
     file = models.FileField(upload_to='files/', null=False, blank=False)
+    situacao = models.CharField(max_length=1, null=True, blank=True, choices=SITUACAO, default='0')
+
+
 
 
