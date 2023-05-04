@@ -60,11 +60,20 @@
                    <td>{{natop.hr_dom}}</td>
                    <td>{{natop.semanas}}</td>
                    <td>{{natop.projeto}}</td>
-                   <td>{{natop.situacao}}</td>
+                   <td>
+                    {% if natop.situacao == 1  %}
+                        <a class="btn btn-success"><span> SUBMETIDA</span></a>
+                    {% endif %}
+                   </td>
 
                <td class="lista-remove">
-                  <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
-                  <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>
+
+                    {% if natop.situacao == 0  %}
+                        <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
+                        <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>
+                    {% endif %}
+
+
                 </td>
               </tr>
               {% endfor %}

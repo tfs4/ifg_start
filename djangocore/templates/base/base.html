@@ -135,21 +135,28 @@ icones https://materializecss.com/icons.html
                     </li>
 
 
-                     <li>
-                        <a href="{% url 'timesheet:listatimesheet' %}">
-                           <i class="material-icons">face</i>
-                            <span>Timesheet</span>
+
+
+
+
+
+<!-- timesheet-->
+<li>
+                        <a href="javascript:void(0);" class="menu-toggle">
+                            <i class="material-icons">face</i>
+                            <span>TimeSheet</span>
                         </a>
+                        <ul class="ml-menu">
+                                 <li>
+                                    <a href="{% url 'timesheet:listatimesheet' %}">
+                                        <span>Lançar Horas</span>
+                                    </a>
+                                 </li>
+                        </ul>
                     </li>
+<!-- fim timesheet-->
 
-
-
-
-
-
-
-
-
+                <!-- Viagens-->
                     <li>
                         <a href="javascript:void(0);" class="menu-toggle">
                             <i class="material-icons">flight_takeoff</i>
