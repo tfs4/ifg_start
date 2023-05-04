@@ -17,8 +17,8 @@
             <h2>
               {{title_complete}}
             </h2>
-              <div class="header-btn">
-
+              <div>
+                  <button class="btn btn-green btn-remover-submeter-horas"><i class="material-icons">check</i> <span>Aprovar</span></button>
               </div>
           </div>
 
@@ -40,12 +40,7 @@
                     <th>Dom</th>
                     <th>Semana</th>
                     <th>Projeto</th>
-                    <th>Submetida</th>
-                    <th>Aprovada</th>
-                    <th>Reprovada</th>
-                    <th>APROVAR HORAS</th>
-                    <th>REPROVAR HORAS</th>
-
+                    <th>Selecionar</th>
 
                 </tr>
               </thead>
@@ -64,12 +59,12 @@
                    <td>{{natop.hr_dom}}</td>
                    <td>{{natop.semanas}}</td>
                    <td>{{natop.projeto}}</td>
-                   <td>{{natop.submetida}}</td>
-                   <td>{{natop.aprovada}}</td>
-                   <td>{{natop.reprovada}}</td>
-                   <td><a href="{% url 'timesheet:aprovarhoras' natop.id %}" class="btn btn-success"><span> APROVAR HORAS</span></a></td>
-                   <td><a href="{% url 'timesheet:editatimesheet' natop.id %}" class="btn btn-success"><span> REPROVAR HORAS</span></a></td>
 
+
+               <td class="lista-remove">
+                        <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
+                        <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>
+                </td>
               </tr>
               {% endfor %}
               {%else%}
