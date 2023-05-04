@@ -2,6 +2,8 @@
 
 0. Instalar as bibliotecas/pacotes (no Linux):
 
+
+## teste
 ```bash
 sudo apt install -y libxml2 gcc python3-dev libxml2-dev libxslt1-dev zlib1g-dev python3-pip
 sudo apt update
