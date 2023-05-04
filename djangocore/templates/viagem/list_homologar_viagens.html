@@ -67,8 +67,22 @@
                    <td>{{natop.tipo_solicitacao}}</td>
                    <td>{{natop.motivo}}</td>
                    <td>{{natop.tipo_transporte}}</td>
-                    <td>{{natop.autorizada}}</td>
-                   <td>{{natop.homologada}}</td>
+                   <td>
+                        {% if natop.autorizada  %}
+                            <a class="btn btn-success"><span> SIM</span></a>
+                        {% else %}
+                            <a class="btn btn-red btn-success"><span> NAO</span></a>
+                        {% endif %}
+
+
+                    </td>
+                   <td>
+                        {% if natop.homologada  %}
+                            <a class="btn btn-success"><span> SIM</span></a>
+                        {% else %}
+                            <a class="btn btn-red btn-success"><span> NAO</span></a>
+                        {% endif %}
+                   </td>
                 <td class="lista-remove">
                   <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
                   <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>

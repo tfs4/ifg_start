@@ -79,3 +79,15 @@ class HorasSemanais(models.Model):
     # aprovada = models.BooleanField(default=False)
     # reprovada = models.BooleanField(default=False)
 
+
+
+
+class Gastos(models.Model):
+
+    descricao = models.CharField(max_length=500, null=False, blank=False)
+    #projeto = models.ForeignKey('norli_projeto.ExemploModel', related_name="certificados_user", on_delete=models.CASCADE, null=True, blank=True)
+    solicitante = models.ForeignKey(User, related_name="gastos_user", on_delete=models.CASCADE, null=True, blank=True)
+    valor = models.CharField(max_length=10, null=False, blank=False)
+    file = models.FileField(upload_to='files/', null=False, blank=False)
+
+

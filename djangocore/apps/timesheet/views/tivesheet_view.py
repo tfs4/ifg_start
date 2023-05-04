@@ -151,3 +151,44 @@ class AprovarTimesheetView(CustomListViewFilter):
         context['title_complete'] = 'Sub-Grupo'
         context['add_url'] = reverse_lazy('timesheet:aprovartimesheet')
         return context
+
+
+
+class ListGastosView(CustomListViewFilter):
+    template_name = 'timesheet/listar_gastos.html'
+    model = Gastos
+    context_object_name = 'all_natops'
+    success_url = reverse_lazy('timesheet:listargastos')
+    permission_codename = 'view_naturezaoperacao'
+    def get_queryset(self):
+        current_user = self.request.user
+        querry = Gastos.objects.filter(solicitante=current_user)
+        #querry = querry.filter(submetida=False)
+        return querry
+
+
+    def get_context_data(self, **kwargs):
+        context = super(ListGastosView, self).get_context_data(**kwargs, object_list=None)
+        #context = self.get_object()
+        context['title_complete'] = 'Listar Gastos'
+        context['add_url'] = reverse_lazy('timesheet:incluirgastos')
+        return context
+
+
+
+class AdicionarGastoView(CustomCreateView):
+
+    form_class = GastosForm
+    template_name = 'timesheet/add.html'
+    success_url = reverse_lazy('timesheet:listargastos')
+    success_message = "Adicionar Exemplo <b>%(cfop)s </b>adicionado com sucesso."
+    permission_codename = 'add_naturezaoperacao'
+
+    def get_success_message(self, cleaned_data):
+        return self.success_message % dict(cleaned_data, cfop=self.object.cfop)
+
+    def get_context_data(self, **kwargs):
+        context = super(AdicionarGastoView, self).get_context_data(**kwargs)
+        context['title_complete'] = 'ADICIONAR EXEMPLO'
+        context['return_url'] = reverse_lazy('timesheet:listargastos')
+        return context

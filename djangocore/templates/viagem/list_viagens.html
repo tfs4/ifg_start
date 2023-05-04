@@ -57,15 +57,24 @@
                    <td>{{natop.dada_fim}}</td>
                    <td>{{natop.origem}}</td>
                    <td>{{natop.destino}}</td>
-                   <td>
+                  <td>
                         {% if natop.autorizada  %}
-                            <a class="btn btn-success"><span> AUTORIZADA</span></a>
-                       {% endif %}
+                            <a class="btn btn-success"><span> SIM</span></a>
+                        {% else %}
+                            <a class="btn btn-red btn-success"><span> NAO</span></a>
+                        {% endif %}
 
-                   <td>
-                       {% if natop.homologada  %}
-                            <a class="btn btn-success"><span> HOMOLOGADA</span></a>
-                       {% endif %}</td>
+
+                    </td>
+                    <td>
+                        {% if natop.homologada  %}
+                            <a class="btn btn-success"><span> SIM</span></a>
+                        {% else %}
+                            <a class="btn btn-red btn-success"><span> NAO</span></a>
+                        {% endif %}
+
+
+                    </td>
                    <td>
                        {% if natop.autorizada and natop.homologada and natop.finalizar_pc == '0' %}
                             <a href="{% url 'viagem:prestar_contas' natop.id %}" class="btn btn-success"><span> PRESTAR CONTAS</span></a>
