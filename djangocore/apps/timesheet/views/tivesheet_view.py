@@ -154,6 +154,45 @@ class AprovarTimesheetView(CustomListViewFilter):
 
 
 
+class AprovarGastosView(CustomListViewFilter):
+    template_name = 'timesheet/aprovar_gastos.html'
+    model = Gastos
+    context_object_name = 'all_natops'
+    success_url = reverse_lazy('timesheet:aprovargastos')
+    permission_codename = 'view_naturezaoperacao'
+    def get_queryset(self):
+        current_user = self.request.user
+        querry = Gastos.objects.filter(situacao='1')
+        #querry = querry.filter(submetida=False)
+        return querry
+
+    def post(self, request, *args, **kwargs):
+        if self.check_user_delete_permission(request, self.model):
+            for key, value in request.POST.items():
+                if value == "on":
+
+
+                    if 'acao' in request.POST:
+                        acao = request.POST['acao']
+                        if acao == 'aprovar_gastos':
+                            instance = self.model.objects.get(id=key)
+                            instance.situacao = 2
+                            instance.save()
+                        elif acao == 'reprovar_gastos':
+                            instance = self.model.objects.get(id=key)
+                            instance.situacao = 3
+                            instance.save()
+
+        return redirect(self.success_url)
+
+    def get_context_data(self, **kwargs):
+        context = super(AprovarGastosView, self).get_context_data(**kwargs, object_list=None)
+        #context = self.get_object()
+        context['title_complete'] = 'Listar Gastos'
+        context['add_url'] = reverse_lazy('timesheet:incluirgastos')
+        return context
+
+
 class ListGastosView(CustomListViewFilter):
     template_name = 'timesheet/listar_gastos.html'
     model = Gastos

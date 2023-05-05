@@ -12,7 +12,7 @@ urlpatterns = [
 
     url(r'timesheet/listargastos/$', views.ListGastosView.as_view(), name='listargastos'),
     url(r'timesheet/incluirgastos/$', views.AdicionarGastoView.as_view(), name='incluirgastos'),
-
+    url(r'timesheet/aprovargastos/$', views.AprovarGastosView.as_view(), name='aprovargastos'),
 
 
 ]
