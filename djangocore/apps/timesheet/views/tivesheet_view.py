@@ -170,10 +170,9 @@ class ListGastosView(CustomListViewFilter):
         if self.check_user_delete_permission(request, self.model):
             for key, value in request.POST.items():
                 if value == "on":
-
+                    acao = request.POST['acao']
 
                     if 'acao' in request.POST:
-                        acao = request.POST['acao']
                         if acao == 'submeter_gastos':
                             instance = self.model.objects.get(id=key)
                             instance.situacao = 1

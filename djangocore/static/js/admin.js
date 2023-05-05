@@ -3562,6 +3562,91 @@ $.Admin.alert_file = {
     },
 }
 
+//
+//
+
+$.Admin.reprovar_gastos = {
+   init: function() {
+        var $btnAutoriza = $('.btn-reprovar-gastos');
+
+
+
+        $('body').on('change', '.lista-remove input[type=checkbox]', function(event){
+            if(this.checked){
+                $(this).parents('tr').addClass("delete-row");
+            }else{
+                $(this).parents('tr').removeClass("delete-row");
+            }
+            $btnAutoriza.show()
+        });
+
+        $btnAutoriza.on('click',function(event){
+            event.preventDefault();
+            var form = $(this).parents('form');
+
+
+             var input = $("<input>")
+                   .attr("type", "hidden")
+                   .attr("name", "acao").val("reprovar_gastos");
+
+            form.append($(input));
+            form.submit();
+        });
+
+
+
+        //Fazer a linha da table um link para a detail view
+        $('body').on('click', '.clickable-row:not(.popup)', function(event){
+            if(!$(event.target).is("input, label, i, .prevent-click-row")){
+                window.document.location = $(this).data("href");
+            }
+        });
+
+    },
+}
+
+
+$.Admin.aprovar_gastos = {
+   init: function() {
+        var $btnAutoriza = $('.btn-aprovar-gastos');
+
+
+
+        $('body').on('change', '.lista-remove input[type=checkbox]', function(event){
+            if(this.checked){
+                $(this).parents('tr').addClass("delete-row");
+            }else{
+                $(this).parents('tr').removeClass("delete-row");
+            }
+            $btnAutoriza.show()
+        });
+
+        $btnAutoriza.on('click',function(event){
+            event.preventDefault();
+            var form = $(this).parents('form');
+
+
+             var input = $("<input>")
+                   .attr("type", "hidden")
+                   .attr("name", "acao").val("aprovar_gastos");
+
+            form.append($(input));
+            form.submit();
+        });
+
+
+
+        //Fazer a linha da table um link para a detail view
+        $('body').on('click', '.clickable-row:not(.popup)', function(event){
+            if(!$(event.target).is("input, label, i, .prevent-click-row")){
+                window.document.location = $(this).data("href");
+            }
+        });
+
+    },
+}
+
+
 
 
 $.Admin.submeter_gastos = {
@@ -3708,6 +3793,10 @@ $(function () {
     $.Admin.aprovar_pc.init();
     $.Admin.reprovar_pc.init();
     $.Admin.submeter_gastos.init();
+    $.Admin.aprovar_gastos.init();
+    $.Admin.reprovar_gastos.init();
+
+
 
 
 

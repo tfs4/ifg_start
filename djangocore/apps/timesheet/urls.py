@@ -11,7 +11,6 @@ urlpatterns = [
     url(r'timesheet/aprovar/$', views.AprovarTimesheetView.as_view(), name='aprovartimesheet'),
 
     url(r'timesheet/listargastos/$', views.ListGastosView.as_view(), name='listargastos'),
-
     url(r'timesheet/incluirgastos/$', views.AdicionarGastoView.as_view(), name='incluirgastos'),
 
 
