@@ -50,7 +50,7 @@
                 <td>{{natop.descricao}}</td>
                 <td>{{natop.valor}}</td>
                 <td><a href="{{natop.file.url}}">Download</a></td>
-               <td>
+                    <td>
                        {% if natop.situacao == '0' %}
                            <a class="btn btn-success"><span>NÃO SUBMETIDA</span></a>
                        {% elif natop.situacao == '1' %}
@@ -60,16 +60,16 @@
                        {% elif natop.situacao == '3' %}
                            <a class="btn btn-red btn-success"><span>REPROVADA</span></a>
                        {% endif %}
-                   </td>
+                    </td>
 
 
 
-                <td class="lista-remove">
+                    <td class="lista-remove">
                        {% if natop.situacao == '0' %}
                         <input type="checkbox" name="{{natop.id}}" id="remover-entrada-{{natop.id}}"/>
                         <label class="remove-entry-label" for="remover-entrada-{{natop.id}}"></label>
                       {% endif %}
-                </td>
+                    </td>
               </tr>
               {% endfor %}
               {%else%}
