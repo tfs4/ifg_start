@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^flavio/', include('djangocore.apps.flavio.urls')),
     url(r'^viagem/', include('djangocore.apps.viagem.urls')),
     url(r'^viagem/', include('djangocore.apps.timesheet.urls')),
+    url(r'^viagem/', include('djangocore.apps.leasing.urls')),
 
 
 ]
