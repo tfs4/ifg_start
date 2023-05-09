@@ -5,6 +5,9 @@ from django.contrib.auth.models import User
 class ObjetoContrato(models.Model):
     tipo = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.tipo
+
 
 class ContratoLocacao(models.Model):
     tipo = models.CharField(max_length=50)
@@ -30,11 +33,7 @@ class ContratoLocacao(models.Model):
     #     blank=True, null=True
     # )
     #
-    # objeto_contrato = models.ForeignKey(
-    #     ObjetoContrato,
-    #     related_name='objeto_contrato',
-    #     on_delete=models.CASCADE
-    # )
+    objeto_contrato = models.ForeignKey(ObjetoContrato, related_name='objetocontrato_contrato', on_delete=models.CASCADE )
 
 
 

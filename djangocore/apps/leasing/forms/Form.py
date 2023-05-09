@@ -21,3 +21,25 @@ class ObjetoContratoForm(forms.ModelForm):
             'tioo': _('Tipo'),
         }
 
+
+
+
+class ContratoLocacaoForm(forms.ModelForm):
+
+    class Meta:
+        model = ContratoLocacao
+        fields = ('tipo', 'objeto_contrato', )
+        widgets = {
+            'tipo': forms.TextInput(attrs={'class': 'form-control', 'size': '200'}),
+            'objeto_contrato': forms.Select(attrs={'class': 'form-control select-produto'}),
+
+
+        }
+        labels = {
+            'tioo': _('Tipo'),
+            'objeto_contrato':  _('Objeto do Contrato'),
+        }
+
+
+
+#ContratoLocacao
