@@ -26,12 +26,12 @@ class ContratoLocacao(models.Model):
     objeto_contrato = models.ForeignKey(ObjetoContrato, related_name='objetocontrato_contrato', on_delete=models.CASCADE )
     local_ativo = models.CharField(max_length=200)
     cpf_cnpj = models.CharField(max_length=200)
-    #data_inicio_contrato
-    #data_fim_contrato
-    #vigencia_primeiro_contrato
-    #vigencia_aditivo_atual
-    #clausula_renovacao boolean
-    #clausula_restritiva_de_uso boolean
-    #clausula_recisao_entra_partes boolean
-    #incentivos_recebidos boolean
-    #valor_incentivos
+    data_inicio_contrato = models.DateField()
+    data_fim_contrato = models.DateField()
+    vigencia_primeiro_contrato = models.CharField(max_length=200)
+    vigencia_aditivo_atual = models.CharField(max_length=200)
+    clausula_renovacao = models.BooleanField(default=False)
+    clausula_restritiva_de_uso  = models.BooleanField(default=False)
+    clausula_recisao_entra_partes  = models.BooleanField(default=False)
+    incentivos_recebidos  = models.BooleanField(default=False)
+    valor_incentivos = models.CharField(max_length=200)
